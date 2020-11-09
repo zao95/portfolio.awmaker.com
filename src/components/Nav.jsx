@@ -4,24 +4,23 @@ import "../styles/Nav.sass"
 const Nav = () => {
     const ulElement = useRef()
     useEffect(() => {
-        const temp = ulElement.current.children
-        for (let i of temp) {
-            console.log(String(i.innerText))
-            const liText = String(i.innerText).split("")
+        const liElement = ulElement.current.children
+        const menu = ["profile", "website", "application"]
+        for (let i = 0; i < liElement.length; i++) {
+            const liText = menu[i].split("")
             liText.forEach((text, idx) => {
                 liText[idx] = text + "<br />"
-                console.log(liText[idx])
             })
-            i.innerHTML = liText.join("")
+            liElement[i].innerHTML = liText.join("")
         }
     }, [])
 	return (
         <nav id="nav">
             <div className="logo clickable" />
             <ul ref={ulElement}>
-                <li className="condensed clickable">PROFILE</li>
-                <li className="condensed clickable">WEBSITE</li>
-                <li className="condensed clickable">APPLICATION</li>
+                <li className="condensed clickable"></li>
+                <li className="condensed clickable"></li>
+                <li className="condensed clickable"></li>
             </ul>
         </nav>
 	)

@@ -1,0 +1,30 @@
+$mobile: 768px
+$visible: 1232px
+
+$background: #252526
+$white: #ffffff
+$black: #000000
+$gray:  #707070
+$grayTransparent:  rgba(0, 0, 0, 0.44)
+$error: #ffe7e6
+$errorPoint: #db4b46
+
+@mixin desktop
+    @media screen and (min-width: #{$mobile})
+        @content
+
+#footer
+    background-color: $background
+    color: $white
+    height: auto
+    font-size: 0.6em
+    font-weight: 300
+    letter-spacing: 0.05em
+    > div
+        padding: 8px 16px
+        @include desktop
+            padding: 12px 24px
+        p
+            margin-bottom: 4px
+            &:last-child
+                margin-bottom: 0

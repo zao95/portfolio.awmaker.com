@@ -1,0 +1,50 @@
+$mobile: 768px
+$visible: 1232px
+
+$background: #252526
+$white: #ffffff
+$black: #000000
+$gray:  #707070
+$grayTransparent:  rgba(0, 0, 0, 0.44)
+$error: #ffe7e6
+$errorPoint: #db4b46
+
+@mixin desktop
+    @media screen and (min-width: #{$mobile})
+        @content
+
+.titlePageWrap.pageWrap
+    height: 100vh
+    justify-content: flex-start
+    align-items: flex-start
+    .titleWrap
+        position: relative
+        width: 100%
+        flex: 1
+        display: flex
+        .background
+            position: relative
+            width: 100%
+            flex: 1
+            display: flex
+            overflow: hidden
+            .videoWrap
+                z-index: -1
+                position: absolute
+                top: -50%
+                left: -50%
+                width: 200%
+                height: 200%
+                .video
+                    position: absolute
+                    top: 0
+                    bottom: 0
+                    right: 0
+                    left: 0
+                    margin: auto
+                    min-height: 50%
+                    min-width: 50%
+            .dark
+                width: 100%
+                flex: 1
+                background-color: rgba(0, 0, 0, 0.5)

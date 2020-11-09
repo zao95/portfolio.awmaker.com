@@ -9,7 +9,7 @@ const Portfolio = () => {
 		<>
 			<Nav />
 			<Main />
-			<Sections.Section0 />
+			<Sections />
 			<Footer />
 		</>
 	)

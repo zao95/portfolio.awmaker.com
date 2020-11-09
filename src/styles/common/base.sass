@@ -1,0 +1,68 @@
+$mobile: 768px
+$visible: 1232px
+
+$point: #4680C1
+$deepPoint: #396EAA
+$iconPoint: #005cff
+$blurPoint: #849EBC
+$brightPoint: #DDE9FD
+$onClick: #173353
+$background: #E5E5E5
+$white: #ffffff
+$black: #000000
+$border: solid 1px #707070
+$borderColor:  #707070
+$error: #ffe7e6
+$errorPoint: #db4b46
+$success: #E8F0FE
+
+@mixin desktop
+    @media screen and (min-width: #{$mobile})
+        @content
+
+*:not([type=checkbox])
+    -webkit-appearance: none
+    margin: 0
+    padding: 0
+    transition: all 0.4s cubic-bezier(.5, 1.8, .5, .8)
+    font-size: 1em
+
+*:not([type=password])
+    font-family: 'NanumSquare', 'Roboto', 'Malgun Gothic', 'Sans-serif'
+
+input[type=button]
+    appearance: none
+    -moz-appearance: none
+    -webkit-appearance: none
+
+input:focus, textarea:focus, select:focus
+    outline: none
+
+html, body
+    color: $black
+    font-size: 14px
+    scroll-behavior: smooth
+    @include desktop
+        font-size: 16px
+
+a, a:visited, a:active, a:hover
+    color: $point
+    text-decoration: none
+    cursor: pointer
+
+.hiddenDisplay
+    display: none !important
+
+.hidden
+    z-index: -999 !important
+    transform: translate(0, -70px) !important
+    opacity: 0 !important
+    height: 0 !important
+    padding: 0 !important
+    margin: 0 auto !important
+
+.clickable
+    cursor: pointer
+    opacity: 0.6
+    &:hover
+        opacity: 0.75

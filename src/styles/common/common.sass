@@ -1,0 +1,34 @@
+$mobile: 768px
+$visible: 1232px
+
+$point: #4680C1
+$deepPoint: #396EAA
+$iconPoint: #005cff
+$blurPoint: #849EBC
+$brightPoint: #DDE9FD
+$onClick: #173353
+$background: #E5E5E5
+$white: #ffffff
+$black: #000000
+$border: solid 1px #707070
+$borderColor:  #707070
+$error: #ffe7e6
+$errorPoint: #db4b46
+$success: #E8F0FE
+
+@mixin desktop
+    @media screen and (min-width: #{$mobile})
+        @content
+
+.pageWrap
+    width: 100%
+    min-height: 700px
+    @include desktop
+        height: 100vh
+
+.tempPage
+    border: solid 5px rgba(0, 0, 0, 1)
+    background-color: rgba(0, 0, 0, 0.5)
+    opacity: 0.4
+    &:hover
+        opacity: 0.7

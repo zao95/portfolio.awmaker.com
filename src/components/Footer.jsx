@@ -1,9 +1,11 @@
 import React from 'react'
-import "../styles/common/Footer.sass"
+import "../styles/Footer.sass"
 
 const Footer = () => {
 	return (
-		<footer></footer>
+		<footer id="footer">
+			Footer
+		</footer>
 	)
 }
 

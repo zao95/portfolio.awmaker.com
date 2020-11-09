@@ -1,20 +1,13 @@
 $mobile: 768px
 $visible: 1232px
 
-$point: #4680C1
-$deepPoint: #396EAA
-$iconPoint: #005cff
-$blurPoint: #849EBC
-$brightPoint: #DDE9FD
-$onClick: #173353
-$background: #E5E5E5
+$background: #252526
 $white: #ffffff
 $black: #000000
-$border: solid 1px #707070
-$borderColor:  #707070
+$gray:  #707070
+$grayTransparent:  rgba(0, 0, 0, 0.44)
 $error: #ffe7e6
 $errorPoint: #db4b46
-$success: #E8F0FE
 
 @mixin desktop
     @media screen and (min-width: #{$mobile})
@@ -22,13 +15,21 @@ $success: #E8F0FE
 
 *:not([type=checkbox])
     -webkit-appearance: none
+    list-style-type: none
     margin: 0
     padding: 0
     transition: all 0.4s cubic-bezier(.5, 1.8, .5, .8)
     font-size: 1em
+    background-position: center center
+    background-size: contain
 
 *:not([type=password])
-    font-family: 'NanumSquare', 'Roboto', 'Malgun Gothic', 'Sans-serif'
+    font-family: 'Roboto', sans-serif
+    // 지원 가능 weight: 100, 300
+
+.condensed
+    font-family: 'Roboto Condensed', sans-serif
+    // 지원 가능 weight: 300, 700
 
 input[type=button]
     appearance: none
@@ -46,7 +47,7 @@ html, body
         font-size: 16px
 
 a, a:visited, a:active, a:hover
-    color: $point
+    color: $black
     text-decoration: none
     cursor: pointer
 
@@ -63,6 +64,3 @@ a, a:visited, a:active, a:hover
 
 .clickable
     cursor: pointer
-    opacity: 0.6
-    &:hover
-        opacity: 0.75

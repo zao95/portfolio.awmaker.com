@@ -1,0 +1,62 @@
+$mobile: 768px
+$visible: 1232px
+
+$background: #252526
+$white: #ffffff
+$black: #000000
+$gray:  #707070
+$grayTransparent:  rgba(0, 0, 0, 0.44)
+$error: #ffe7e6
+$errorPoint: #db4b46
+
+@mixin desktop
+    @media screen and (min-width: #{$mobile})
+        @content
+
+.indexPageWrap.pageWrap
+    justify-content: flex-start
+    align-items: flex-start
+    .indexWrap
+        position: relative
+        width: 100%
+        top: 59vh
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        p
+            position: relative
+            color: $white
+            text-transform: uppercase
+        .title
+            display: flex
+            flex-direction: row
+            align-items: flex-end
+        .mainTitle
+            .lineHorizon
+                width: 128px
+                height: 2px
+                margin-right: 80px
+            .lineVertical
+                width: 2px
+                height: 91px
+                margin-right: 64px
+            p
+                bottom: -0.25em
+                font-size: 8em
+                font-weight: 700
+                margin-right: 64px
+                letter-spacing: 0.05em
+                &:last-child
+                    margin-right: 0
+        .subTitle
+            align-items: flex-end
+            p
+                bottom: -0.25em
+                font-size: 1.5em
+                font-weight: 100
+                margin-right: 24px
+                letter-spacing: 0.07em
+            .lineVertical
+                width: 2px
+                height: 17px
+                margin-right: 104px

@@ -5,7 +5,7 @@ name: Node.js CI
 
 on: # 에 푸쉬되면 작동 a
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:

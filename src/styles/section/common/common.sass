@@ -1,0 +1,26 @@
+$mobile: 768px
+$visible: 1232px
+
+$background: #252526
+$white: #ffffff
+$black: #000000
+$gray:  #707070
+$grayTransparent:  rgba(0, 0, 0, 0.44)
+$error: #ffe7e6
+$errorPoint: #db4b46
+
+@mixin desktop
+    @media screen and (min-width: #{$mobile})
+        @content
+
+.pageWrap
+    position: relative
+    width: auto
+    min-height: 400px
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    align-items: center
+
+.line
+    background-color: $white

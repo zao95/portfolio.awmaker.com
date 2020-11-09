@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import rootReducer from './reducers/reducers'
 import Portfolio from './components/Portfolio'
 import "./styles/common/base.sass"
-import "./styles/common/common.sass"
+import "./styles/common/page.sass"
 
 const store = createStore(
     rootReducer

@@ -1,1 +1,0 @@
-ffmpeg -i taja.mp4 -c copy -an mr_taja.mp4

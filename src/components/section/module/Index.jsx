@@ -3,7 +3,7 @@ import React from 'react'
 const Index = ({sectionNumber, indexNumber, title, subTitle=""}) => {
 	return (
 		<>
-            <div id={`section${sectionNumber}`} className="indexPageWrap pageWrap">
+            <div id={`section${sectionNumber}Index`} className="indexPageWrap pageWrap">
 				<div className="indexWrap">
                     <div className="mainTitle title">
                         <div className="lineHorizon line" />

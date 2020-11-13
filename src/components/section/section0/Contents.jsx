@@ -1,4 +1,16 @@
 import React from 'react'
+import resumeDocxKr from "../../../assets/files/resume_kr.docx"
+import resumeHwpKr from "../../../assets/files/resume_kr.hwp"
+import resumePdfKr from "../../../assets/files/resume_kr.pdf"
+import coverLetterDocxKr from "../../../assets/files/cover_letter_kr.docx"
+import coverLetterHwpKr from "../../../assets/files/cover_letter_kr.hwp"
+import coverLetterPdfKr from "../../../assets/files/cover_letter_kr.pdf"
+import resumeDocxEn from "../../../assets/files/resume_en.docx"
+import resumeHwpEn from "../../../assets/files/resume_en.hwp"
+import resumePdfEn from "../../../assets/files/resume_en.pdf"
+import coverLetterDocxEn from "../../../assets/files/cover_letter_en.docx"
+import coverLetterHwpEn from "../../../assets/files/cover_letter_en.hwp"
+import coverLetterPdfEn from "../../../assets/files/cover_letter_en.pdf"
 
 const Contents = () => {
 	return (
@@ -34,16 +46,33 @@ const Contents = () => {
 						<div className="leftWrap">
 							<div className="filesWrap">
 								<p className="subTitle condensed">
-									resume
+									Résumé
 								</p>
 								<p className="explanation">
 									Download my resume according to 
 									your word software program.
 								</p>
 								<div className="files">
-									<div className="doc file" />
-									<div className="hwp file" />
-									<div className="pdf file" />
+									<a href={resumeDocxKr} tarbet="_blank" download>
+										<div className="docxKr file" />
+									</a>
+									<a href={resumeHwpKr} tarbet="_blank" download>
+										<div className="hwpKr file" />
+									</a>
+									<a href={resumePdfKr} tarbet="_blank" download>
+										<div className="pdfKr file" />
+									</a>
+								</div>
+								<div className="files">
+									<a href={resumeDocxEn} tarbet="_blank" download>
+										<div className="docxEn file" />
+									</a>
+									<a href={resumeHwpEn} tarbet="_blank" download>
+										<div className="hwpEn file" />
+									</a>
+									<a href={resumePdfEn} tarbet="_blank" download>
+										<div className="pdfEn file" />
+									</a>
 								</div>
 							</div>
 						</div>
@@ -58,9 +87,26 @@ const Contents = () => {
 									to your word software program.
 								</p>
 								<div className="files">
-									<div className="doc file" />
-									<div className="hwp file" />
-									<div className="pdf file" />
+									<a href={coverLetterDocxKr} tarbet="_blank" download>
+										<div className="docxKr file" />
+									</a>
+									<a href={coverLetterHwpKr} tarbet="_blank" download>
+										<div className="hwpKr file" />
+									</a>
+									<a href={coverLetterPdfKr} tarbet="_blank" download>
+										<div className="pdfKr file" />
+									</a>
+								</div>
+								<div className="files">
+									<a href={coverLetterDocxEn} tarbet="_blank" download>
+										<div className="docxEn file" />
+									</a>
+									<a href={coverLetterHwpEn} tarbet="_blank" download>
+										<div className="hwpEn file" />
+									</a>
+									<a href={coverLetterPdfEn} tarbet="_blank" download>
+										<div className="pdfEn file" />
+									</a>
 								</div>
 							</div>
 						</div>

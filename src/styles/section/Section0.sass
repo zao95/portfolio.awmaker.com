@@ -13,4 +13,88 @@ $errorPoint: #db4b46
     @media screen and (min-width: #{$mobile})
         @content
 
-#section0
+#section0Title
+    .titleWrap
+        .overlayWrap
+            > .lineVertical
+                height: 223px
+            .contentsWrap
+                p
+                    line-height: 26px
+#section0Contents
+    .contentsWrap
+        .mainWrap
+            &.subWrap
+                margin-top: 0px
+                max-width: 450px
+            .filesWrap
+                margin-top: 100px
+                .subTitle
+                    text-transform: uppercase
+                    font-size: 1.5em
+                    font-weight: 700
+                    letter-spacing: 0.07em
+                    line-height: 60px
+                .explanation
+                    font-size: 0.75em
+                    line-height: 26px
+                .files
+                    margin-top: 42px
+                    display: flex
+                    flex-direction: row
+                    justify-content: space-between
+                    .file
+                        width: 36px
+                        height: 40px
+                        background-position: center center
+                        background-size: contain
+                        background-repeat: no-repeat
+                        cursor: pointer
+                    .doc
+                        background-image: url("../../assets/icons/doc_icon.png")
+                    .hwp
+                        background-image: url("../../assets/icons/hwp_icon.png")
+                    .pdf
+                        background-image: url("../../assets/icons/pdf_icon.png")
+        .introduceWrap
+            width: 100%
+            max-width: 1080px
+            margin-top: 120px
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+            .introduceflex
+                width: 100%
+                display: flex
+                flex-direction: column
+                align-items: center
+                .icon
+                    width: 120px
+                    height: 120px
+                    background-position: center center
+                    background-size: contain
+                    background-repeat: no-repeat
+                .subTitle
+                    text-transform: uppercase
+                    font-weight: 700
+                    font-size: 1.5em
+                    margin-top: 22px
+                .introduce
+                    margin-top: 34px
+                    p
+                        font-size: 0.75em
+                        font-weight: 300
+                        line-height: 22px
+                        text-align: center
+                &:nth-child(1)
+                    .icon
+                        background-image: url("../../assets/images/introduce_1.png")
+                &:nth-child(2)
+                    .icon
+                        background-image: url("../../assets/images/introduce_2.png")
+                &:nth-child(3)
+                    .icon
+                        background-image: url("../../assets/images/introduce_3.png")
+                &:nth-child(4)
+                    .icon
+                        background-image: url("../../assets/images/introduce_4.png")

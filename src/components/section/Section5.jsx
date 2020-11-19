@@ -1,14 +1,11 @@
-import Index from "./module/Index"
-import Title from "./section5/Title"
+import Index from "./section5/Index"
 import Contents from "./section5/Contents"
-
 import "../../styles/section/Section5.sass"
 
 const Section5 = () => {
 	return (
         <>
-            <Index sectionNumber="5" indexNumber="03" title="application" subTitle="restai" />
-            <Title />
+            <Index />
             <Contents />
         </>
     )

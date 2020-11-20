@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import onlinePortfolioVideo from "../../../assets/video/online_portfolio.mp4"
+import tajaVideo from "../../../assets/video/taja.mp4"
 import { Controller, Scene } from 'react-scrollmagic'
 import { Tween, Timeline } from 'react-gsap'
 
@@ -95,7 +95,7 @@ const Index = () => {
                                                 >
                                                     <div className="videoWrap">
                                                         <video ref={videoElement} className="video" autoPlay muted={true}>
-                                                            <source src={onlinePortfolioVideo} type="video/mp4" />
+                                                            <source src={tajaVideo} type="video/mp4" />
                                                         </video>
                                                     </div>
                                                 </Tween>

@@ -1,7 +1,15 @@
 import React from 'react'
 import mockup from "../../../assets/images/countap_mockup.png"
+import SwiperComponent from "../../common/SwiperComponent"
 
 const Contents = () => {
+	const slideContents = [
+		<div></div>,
+		<div></div>,
+		<div></div>,
+		<div></div>,
+		<div></div>,
+	]
 	return (
 		<>
             <div id="section2Contents" className="contentsPageWrap pageWrap">
@@ -30,9 +38,7 @@ const Contents = () => {
 						</div>
 					</div>
 					<div className="mockup" style={{backgroundImage: `url(${mockup})`}} />
-					<div className="slideShow">
-
-					</div>
+					<SwiperComponent contents={slideContents} />
 				</div>
 			</div>
 		</>

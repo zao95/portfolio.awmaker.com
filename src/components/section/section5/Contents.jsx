@@ -1,10 +1,18 @@
 import React from 'react'
 import mockup from "../../../assets/images/restai_mockup.png"
+import SwiperComponent from "../../common/SwiperComponent"
 
 const Contents = () => {
+	const slideContents = [
+		<div></div>,
+		<div></div>,
+		<div></div>,
+		<div></div>,
+		<div></div>,
+	]
 	return (
 		<>
-            <div id="section5Contents" className="contentsPageWrap pageWrap">
+            <div id="section5Contents" className="contentsPageWrap pageWrap applicationPageWrap">
 				<div className="contentsWrap">
 					<p className="title condensed">
 						AR Restaurant Reservation Platform
@@ -33,9 +41,7 @@ const Contents = () => {
 						</div>
 					</div>
 					<div className="mockup" style={{backgroundImage: `url(${mockup})`}} />
-					<div className="slideShow">
-						Slide Show
-					</div>
+					<SwiperComponent contents={slideContents} />
 				</div>
 			</div>
 		</>

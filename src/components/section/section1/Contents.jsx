@@ -1,14 +1,19 @@
 import React from 'react'
 import mockup from "../../../assets/images/online_portfolio_mockup.png"
 import SwiperComponent from "../../common/SwiperComponent"
+import onlinePortfolioVideo from "../../../assets/video/online_portfolio.mp4"
+import slide01 from "../../../assets/slides/01/01.png"
+import slide02 from "../../../assets/slides/01/02.jpg"
+import slide03 from "../../../assets/slides/01/03.png"
 
 const Contents = () => {
 	const slideContents = [
-		<div></div>,
-		<div></div>,
-		<div></div>,
-		<div></div>,
-		<div></div>,
+		<video controls>
+			<source src={onlinePortfolioVideo} type="video/mp4"></source>
+		</video>,
+		<div style={{backgroundImage: `url(${slide01})`}}></div>,
+		<div style={{backgroundImage: `url(${slide02})`}}></div>,
+		<div style={{backgroundImage: `url(${slide03})`}}></div>,
 	]
 	return (
 		<>

@@ -1,14 +1,25 @@
 import React from 'react'
 import mockup from "../../../assets/images/countap_mockup.png"
 import SwiperComponent from "../../common/SwiperComponent"
+import slide00 from "../../../assets/slides/02/00.mp4"
+import slide01 from "../../../assets/slides/02/01.png"
+import slide02 from "../../../assets/slides/02/02.png"
+import slide03 from "../../../assets/slides/02/03.png"
+import slide04 from "../../../assets/slides/02/04.png"
+import slide05 from "../../../assets/slides/02/05.png"
+import slide06 from "../../../assets/slides/02/06.png"
 
 const Contents = () => {
 	const slideContents = [
-		<div></div>,
-		<div></div>,
-		<div></div>,
-		<div></div>,
-		<div></div>,
+		<video controls>
+			<source src={slide00} type="video/mp4"></source>
+		</video>,
+		<div style={{backgroundImage: `url(${slide01})`}}></div>,
+		<div style={{backgroundImage: `url(${slide02})`}}></div>,
+		<div style={{backgroundImage: `url(${slide03})`}}></div>,
+		<div style={{backgroundImage: `url(${slide04})`}}></div>,
+		<div style={{backgroundImage: `url(${slide05})`}}></div>,
+		<div style={{backgroundImage: `url(${slide06})`}}></div>,
 	]
 	return (
 		<>

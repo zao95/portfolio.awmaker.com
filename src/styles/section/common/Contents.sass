@@ -73,21 +73,25 @@ $errorPoint: #db4b46
             height: 400px
             @include desktop
                 height: 600px
+            .swiper-button-next, .swiper-button-prev
+                color: #000000
             .swiper-wrapper
                 .swiper-slide
                     width: 100%
-                    > div
-                        width: 100%
-                        height: 100%
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    > div, video, img
+                        width: 90%
+                        height: 90%
                         background-position: center center
                         background-size: contain
                         background-repeat: no-repeat
                         background-color: rgba(0, 0, 0, 0.14)
+                        outline: none
     &.applicationPageWrap
         .contentsWrap
             .swiper-container
                 .swiper-wrapper
                     .swiper-slide
                         width: 30%
-                        > div
-                            width: 100%

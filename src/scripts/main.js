@@ -1,5 +1,5 @@
-let MAX_PARTICLES = 500  // ADD
-let MAX_TRIANGLES = 1500  //500 // ADD
+let MAX_PARTICLES = null  // ADD
+let MAX_TRIANGLES = null  //500 // ADD
 let MAX_PARTICLE_SPEED = 2  // 1.0;
 let SIZE = 2  //2;
 let LIFESPAN_DECREMENT = 2.0  //.5  //2.0
@@ -10,16 +10,18 @@ let MAX_WANDERER_SPEED = 6  //4;
 let SPAWN_DELAY = 20  //10
 let PARTICLE_LIFESPAN = 100
 let SPAWN_POS_RANDOM = 10
+let MAX_BRIGHTNESS = 120
 // Simulation Systems
 let system = null
 let triangles = null
 // Particle spawner
-let MAX_SPAWNER = 5
+let MAX_SPAWNER = null
+
 let spawners = []
 /* Global colour object */
 let colour = null
 let p5 = null
-let MAX_PARTICLE_DRAG = 3
+let MAX_PARTICLE_DRAG = null
 let isActive = 0
 
 export class p5MainScript {
@@ -34,6 +36,17 @@ export class p5MainScript {
 		system = new ParticleSystem()
         triangles = new TriangleSystem()
         // Particle spawner
+        if (window.innerWidth < 960) {
+            MAX_SPAWNER = 1
+            MAX_PARTICLE_DRAG = 1
+            MAX_PARTICLES = 50
+            MAX_TRIANGLES = 150
+        } else {
+            MAX_SPAWNER = 5
+            MAX_PARTICLE_DRAG = 4
+            MAX_PARTICLES = 500  // ADD
+            MAX_TRIANGLES = 1500  //500 // ADD
+        }
         for (let i = 0; i < MAX_SPAWNER; i++) {
             spawners.push(new Wanderer())
         }
@@ -52,10 +65,10 @@ export class p5MainScript {
             const y = locY + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
             return p5.createVector(x, y)
         }
-        for (let i = 0; i < MAX_SPAWNER; i++) {
+        for (let i = 0; i < spawners.length; i++) {
             spawners[i].update()
         }
-        for (let i = 0; i < MAX_SPAWNER; i++) {
+        for (let i = 0; i < spawners.length; i++) {
             system.addParticle(locationRandom(spawners[i].loc.x, spawners[i].loc.y))
         }
         // Update our particle and triangle systems each frame
@@ -63,12 +76,28 @@ export class p5MainScript {
         triangles.display()
     }
     mouseDragged(p5) {
-        if(isActive < MAX_PARTICLE_DRAG) {
+        if(isActive < MAX_PARTICLE_DRAG && system) {
             isActive += 1
             let posX = p5.mouseX
             let posY = p5.mouseY
             system.addParticle(p5.createVector(posX, posY))
         }
+    }
+    touchStarted(p5) {
+        let posX = p5.mouseX
+        let posY = p5.mouseY
+        if (system) {
+            system.addParticle(p5.createVector(posX, posY))
+            system.addParticle(p5.createVector(posX, posY))
+            system.addParticle(p5.createVector(posX, posY))
+            system.addParticle(p5.createVector(posX, posY))
+            system.addParticle(p5.createVector(posX, posY))
+            system.addParticle(p5.createVector(posX, posY))
+        }
+    }
+    windowResized(p5) {
+        p5.resizeCanvas(window.innerWidth, window.innerHeight + 11)
+        window.innerWidth < 960 ? MAX_SPAWNER = 2 : MAX_SPAWNER = 5
     }
 }
 
@@ -77,9 +106,9 @@ class ColourGenerator {
         this.MIN_SPEED = 0.2
         this.MAX_SPEED = 0.7
         // Starting colour
-        this.R = p5.random(255)
-        this.G = p5.random(255)
-        this.B = p5.random(255)
+        this.R = p5.random(0, MAX_BRIGHTNESS)
+        this.G = p5.random(0, MAX_BRIGHTNESS)
+        this.B = p5.random(0, MAX_BRIGHTNESS)
         // Starting transition speed
         this.Rspeed = (p5.random(1) > 0.5 ? 1 : -1) * p5.random(this.MIN_SPEED, this.MAX_SPEED)
         this.Gspeed = (p5.random(1) > 0.5 ? 1 : -1) * p5.random(this.MIN_SPEED, this.MAX_SPEED)
@@ -87,11 +116,11 @@ class ColourGenerator {
     }
     update() {
         // Use transition to alter original colour (Keep within RGB bounds)
-        this.Rspeed = ((this.R += this.Rspeed) > 255 ||
+        this.Rspeed = ((this.R += this.Rspeed) > MAX_BRIGHTNESS ||
             (this.R < 0)) ? -this.Rspeed : this.Rspeed
-        this.Gspeed = ((this.G += this.Gspeed) > 255 ||
+        this.Gspeed = ((this.G += this.Gspeed) > MAX_BRIGHTNESS ||
             (this.G < 0)) ? -this.Gspeed : this.Gspeed
-        this.Bspeed = ((this.B += this.Bspeed) > 255 ||
+        this.Bspeed = ((this.B += this.Bspeed) > MAX_BRIGHTNESS ||
             (this.B < 0)) ? -this.Bspeed : this.Bspeed
     }
 }

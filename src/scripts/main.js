@@ -14,7 +14,8 @@ let SPAWN_POS_RANDOM = 10
 let system = null
 let triangles = null
 // Particle spawner
-let MAX_SPAWNER = 5
+let MAX_SPAWNER = null
+
 let spawners = []
 /* Global colour object */
 let colour = null
@@ -34,6 +35,7 @@ export class p5MainScript {
 		system = new ParticleSystem()
         triangles = new TriangleSystem()
         // Particle spawner
+        window.innerWidth < 960 ? MAX_SPAWNER = 2 : MAX_SPAWNER = 5
         for (let i = 0; i < MAX_SPAWNER; i++) {
             spawners.push(new Wanderer())
         }
@@ -69,6 +71,10 @@ export class p5MainScript {
             let posY = p5.mouseY
             system.addParticle(p5.createVector(posX, posY))
         }
+    }
+    windowResized(p5) {
+        p5.resizeCanvas(window.innerWidth, window.innerHeight + 11)
+        window.innerWidth < 960 ? MAX_SPAWNER = 2 : MAX_SPAWNER = 5
     }
 }
 

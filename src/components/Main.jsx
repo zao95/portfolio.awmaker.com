@@ -20,7 +20,7 @@ const Main = () => {
 						p5Main.draw(p5)
 					}}
 					windowResized={(p5) => {
-						p5.resizeCanvas(window.innerWidth, window.innerHeight + 11)
+						p5Main.windowResized(p5)
 					}}
 					mouseDragged={(p5) => {
 						p5Main.mouseDragged(p5)

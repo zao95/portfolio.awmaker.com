@@ -1,25 +1,29 @@
-let MAX_PARTICLES = 100  // ADD
-let MAX_TRIANGLES = 500  //500 // ADD
-let MAX_PARTICLE_SPEED = 1.5  // 1.0;
-let SIZE = 1  //2;
-let LIFESPAN_DECREMENT = 1.0  //.5  //2.0
-let MAX_TRI_DISTANCE = 50  //50  //35 //25
-let MIN_TRI_DISTANCE = 10  //15  //10
+let MAX_PARTICLES = 500  // ADD
+let MAX_TRIANGLES = 1500  //500 // ADD
+let MAX_PARTICLE_SPEED = 2  // 1.0;
+let SIZE = 2  //2;
+let LIFESPAN_DECREMENT = 2.0  //.5  //2.0
+let MAX_TRI_DISTANCE = 80  //50  //35 //25
+let MIN_TRI_DISTANCE = 15  //15  //10
 let MAX_PARTICLE_NEIGHBOURS = 10  //5;//10;//5;
-let MAX_WANDERER_SPEED = 4  //4;
+let MAX_WANDERER_SPEED = 6  //4;
 let SPAWN_DELAY = 20  //10
-let PARTICLE_LIFESPAN = 255
+let PARTICLE_LIFESPAN = 100
+let SPAWN_POS_RANDOM = 10
 // Simulation Systems
 let system = null
 let triangles = null
 // Particle spawner
-let spawner = null
+let MAX_SPAWNER = 5
+let spawners = []
 /* Global colour object */
 let colour = null
 let p5 = null
+let MAX_PARTICLE_DRAG = 3
+let isActive = 0
 
 export class p5MainScript {
-    setup = (p5Lib, canvasParentRef) => {
+    setup(p5Lib, canvasParentRef) {
         p5 = p5Lib
 		p5.createCanvas(window.innerWidth, window.innerHeight + 11).parent(canvasParentRef)
 		p5.clear()
@@ -29,22 +33,42 @@ export class p5MainScript {
 		// Simulation Systems
 		system = new ParticleSystem()
         triangles = new TriangleSystem()
-		// Particle spawner
-		spawner = new Wanderer()
+        // Particle spawner
+        for (let i = 0; i < MAX_SPAWNER; i++) {
+            spawners.push(new Wanderer())
+        }
 		/* Global colour object */
         colour = new ColourGenerator()
     }
-    draw = (p5) => {
+    draw(p5) {
+        isActive = 0
         p5.clear()
         // Clear Triangles
         triangles.clear()
         // Move spawner
-        spawner.update()
         // Add particles at spawner location
-        system.addParticle(p5.createVector(spawner.loc.x, spawner.loc.y))
+        const locationRandom = (locX, locY) => {
+            const x = locX + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
+            const y = locY + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
+            return p5.createVector(x, y)
+        }
+        for (let i = 0; i < MAX_SPAWNER; i++) {
+            spawners[i].update()
+        }
+        for (let i = 0; i < MAX_SPAWNER; i++) {
+            system.addParticle(locationRandom(spawners[i].loc.x, spawners[i].loc.y))
+        }
         // Update our particle and triangle systems each frame
         system.update()
         triangles.display()
+    }
+    mouseDragged(p5) {
+        if(isActive < MAX_PARTICLE_DRAG) {
+            isActive += 1
+            let posX = p5.mouseX
+            let posY = p5.mouseY
+            system.addParticle(p5.createVector(posX, posY))
+        }
     }
 }
 
@@ -52,14 +76,6 @@ class ColourGenerator {
     constructor() {
         this.MIN_SPEED = 0.2
         this.MAX_SPEED = 0.7
-        this.R = null
-        this.G = null
-        this.B = null
-        this.Rspeed = null
-        this.Gspeed = null
-        this.Bspeed = null
-    }
-    init() {
         // Starting colour
         this.R = p5.random(255)
         this.G = p5.random(255)
@@ -215,9 +231,9 @@ class TriangleSystem {
         }
     }
     display() {
-        p5.noStroke();
-        p5.stroke(`rgba(${p5.max(colour.R, 0)}, ${p5.max(colour.G, 0)}, ${p5.max(colour.B, 0)}, 0.13)`)  // - 15, 0), max(colour.G - 15, 0), max(colour.B, 0), 13);
-        p5.fill(`rgba(${Math.round(colour.R)}, ${Math.round(colour.G)}, ${Math.round(colour.B)}, 0.2)`)
+        p5.noStroke()
+        p5.stroke(`rgba(${Math.round(p5.max(colour.R, 0))}, ${Math.round(p5.max(colour.G, 0))}, ${Math.round(p5.max(colour.B, 0))}, 0.12)`)  // - 15, 0), max(colour.G - 15, 0), max(colour.B, 0), 13);
+        p5.fill(`rgba(${Math.round(colour.R)}, ${Math.round(colour.G)}, ${Math.round(colour.B)}, 0.07)`)
         //noFill()
         p5.beginShape(p5.TRIANGLES);
         for (let i = 0; i < this.triangles.length; i++) {

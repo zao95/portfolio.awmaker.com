@@ -17,12 +17,10 @@ import 'swiper/components/zoom/zoom.scss'
 
 const SwiperComponent = (props) => {
     SwiperCore.use([Navigation, Pagination, A11y])
-    console.log(props)
     let components = []
     props.contents.forEach((el, idx) => {
         components.push(<SwiperSlide key={idx}>{el}</SwiperSlide>)
     })
-    console.log(components)
     return (
         <Swiper
             grabCursor={true}
@@ -32,8 +30,8 @@ const SwiperComponent = (props) => {
             slidesPerView="auto"
             navigation
             pagination={{ clickable: true, dynamicBullets: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
         >
             {components}
         </Swiper>

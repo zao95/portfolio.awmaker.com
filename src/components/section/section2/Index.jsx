@@ -157,6 +157,10 @@ const Index = () => {
                                                         <p>REACT</p>
                                                         <p>REDUX</p>
                                                         <p>AWS ARCHITECTURE</p>
+                                                        <p>&nbsp;</p>
+                                                        <p><b>HONOR</b></p>
+                                                        <p>Winning the president prize</p>
+                                                        <p>at Anyang University's Capstone Contest</p>
                                                     </div>
                                                 </Tween>
                                             </Timeline>

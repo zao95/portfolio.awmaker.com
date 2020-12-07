@@ -145,11 +145,14 @@ const Contents = () => {
 								<p>Korea IT Service Association's Autumn</p>
 								<p>Academic Conference.</p>
 								<p>&nbsp;</p>
-								<p>Winning the grand prize at Anyang</p>
-								<p>University's Startup Idea Contest.</p>
+								<p>Winning the president prize</p>
+								<p>at Anyang University's Capstone Contest.</p>
 								<p>&nbsp;</p>
-								<p>Winning a number of Excellence Prizes at</p>
-								<p>Anyang University's Startup Idea Contest.</p>
+								<p>Winning the grand prize</p>
+								<p>at Anyang University's Startup Idea Contest.</p>
+								<p>&nbsp;</p>
+								<p>Winning a number of Excellence Prizes </p>
+								<p>at Anyang University's Startup Idea Contest.</p>
 							</div>
 						</div>
 						<div className="introduceflex">

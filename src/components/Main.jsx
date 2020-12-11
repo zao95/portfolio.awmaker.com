@@ -7,15 +7,10 @@ import 'rc-slider/assets/index.css'
 import "../styles/Main.sass"
 
 // 할 것
-// https://medium.com/@nishancw/audio-visualization-in-javascript-with-p5-js-cf3bc7f1be07
-// 음악에 맞춰서 particle 움직임 속도 배속넣기
-// 배속은 mainScript에서 메소드로 전역변수 변경해버리기
-
-// 중앙 부분에 특정 텍스트 모양으로 두껍게 고정 파티클 넣기
-// 로고 테두리 따라서 파티클 넣고,
-// 음악에 맞춰서 확대/축소 반복하기
-// 볼륨에 역수 취해서 particle speed 곱하기. 0은 제외.
-//
+// 1. 	중앙 부분에 특정 텍스트 모양으로 두껍게 고정 파티클 넣기
+// 		로고 테두리 따라서 파티클 넣고,
+// 		음악에 맞춰서 확대/축소 반복하기
+// 2. 	로딩 페이지 제작해서, p5 로드 끝나면 없애기
 const Main = () => {
 	const p5Main = new p5MainScript()
 	const [mixBlend, setMixBlend] = useState(false)

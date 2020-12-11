@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Sketch from "react-p5"
 import { p5MainScript } from "../scripts/main"
-import "../styles/Main.sass"
 import music from "../assets/musics/bgm.mp3"
+import Slider from 'rc-slider'
+import 'rc-slider/assets/index.css'
+import "../styles/Main.sass"
 
 // 할 것
 // https://medium.com/@nishancw/audio-visualization-in-javascript-with-p5-js-cf3bc7f1be07
@@ -13,21 +15,56 @@ import music from "../assets/musics/bgm.mp3"
 // 로고 테두리 따라서 파티클 넣고,
 // 음악에 맞춰서 확대/축소 반복하기
 // 볼륨에 역수 취해서 particle speed 곱하기. 0은 제외.
-// 
+//
 const Main = () => {
 	const p5Main = new p5MainScript()
+	const [mixBlend, setMixBlend] = useState(false)
+	const volumeIcon = useRef(null)
+	const volumeControlWrap = useRef(null)
+	const SliderView = (e) => {
+		if (volumeControlWrap.current !== null) {
+			const target = volumeControlWrap.current.children[1]
+			e ? target.style.width = "30px" : target.style.width = "60px"
+		}
+	}
 	useEffect(() => {
-        document.getElementById("volume").value = 100
-	})
+		if (!mixBlend) {
+			window.addEventListener('scroll', (e) => {
+				setMixBlend(true)
+				document.getElementById("nav").style.mixBlendMode = "difference"
+				document.getElementById("nav").style.filter = "invert(100%)"
+				document.getElementById("musicBox").style.mixBlendMode = "difference"
+				document.getElementById("musicBox").style.filter = "invert(100%)"
+			})
+		}
+	}, [mixBlend])
 	return (
 		<>
             <div id="Main" className="pageWrap" style={{justifyContent: "center"}}>
-				<div id="musicBox">
-					<div id="music_start" onClick={p5Main.musicStart}/>
-					<div id="volume-control">
-						<input id="volume" type="range" max="100" onInput={p5Main.volumeControl} />
+				<div id="musicBox" onMouseLeave={() => SliderView(1)}>
+					<div id="musicPlay" onClick={p5Main.musicPlay}/>
+					<div id="volumeWrap" ref={volumeControlWrap} onMouseOver={() => SliderView(0)}>
+						<div id="volumeIcon" ref={volumeIcon} onClick={() => p5Main.volumeControl("mute")}/>
+						<Slider
+							className="volumeControl"
+							defaultValue={100}
+							min={0}
+							max={100}
+							onChange={p5Main.volumeControl}
+							trackStyle={{backgroundColor: "#000"}}
+							railStyle={{backgroundColor: "#000"}}
+							handleStyle={{borderColor: "#000"}}
+						/>
 					</div>
 					<div id="visualizer">
+						<div />
+						<div />
+						<div />
+						<div />
+						<div />
+						<div />
+						<div />
+						<div />
 						<div />
 						<div />
 						<div />

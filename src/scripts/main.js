@@ -1,3 +1,10 @@
+import volumeUp from "../assets/icons/volume_up.svg"
+import volumeDown from "../assets/icons/volume_down.svg"
+import volumeZero from "../assets/icons/volume_zero.svg"
+import volumeMute from "../assets/icons/volume_mute.svg"
+import playArrow from "../assets/icons/play_arrow.svg"
+import pause from "../assets/icons/pause.svg"
+
 // P5 variable
 let MAX_PARTICLES = null  // ADD
 let MAX_TRIANGLES = null  //500 // ADD
@@ -21,18 +28,20 @@ let colour = null
 let p5 = null
 let MAX_PARTICLE_DRAG = null
 let isActive = 0
-let song = null
 // Audio variable
 let audioElement = null
-let audioVolume = 0
+let audioIconElement = null
+let audioVolumeSave = 1
+let audioVolume = 1
+let audioMute = false
 let audioCtx = null
 let analyser = null
 let source = null
 let data = null
+let visualizerElement = null
 
 export class p5MainScript {
-    async musicStart() {
-        console.log("musicPlay")
+    async musicPlay() {
         const createAnalyser = async () => {
             audioElement = document.getElementById("bgm")
             audioElement.volume = audioVolume
@@ -50,10 +59,13 @@ export class p5MainScript {
             // 데이터 저장소 생성
             data = new Uint8Array(analyser.frequencyBinCount)
         }
+        visualizerElement = document.getElementById("visualizer")
+        const audioPlayIconElement = document.getElementById("musicPlay")
         if(!source) {
             await createAnalyser()
             .then(() => {
                 audioElement.play()
+                audioPlayIconElement.style.backgroundImage = `url(${pause})`
             }).catch((e) => {
                 console.log("Create Analyser function error")
                 console.log(e)
@@ -62,9 +74,11 @@ export class p5MainScript {
         else {
             if (audioElement.paused) {
                 audioElement.play()
+                audioPlayIconElement.style.backgroundImage = `url(${pause})`
             } else {
                 audioElement.pause()
                 MAX_PARTICLE_SPEED_MULTIPLE = 1
+                audioPlayIconElement.style.backgroundImage = `url(${playArrow})`
             }
         }
     }
@@ -72,21 +86,51 @@ export class p5MainScript {
         if(audioCtx && !audioElement.paused) {
             // data에 데이터를 넣어라
             analyser.getByteFrequencyData(data)
-            let volume = (data.slice(0, 16).reduce(( p, c ) => p + c, 0) / data.length)
-            volume = audioVolume ? volume / (Math.log(audioVolume * 100) - Math.log(2)) / 1.5 - 3: 1
-            console.log("volume", volume)
+            let volume = data.slice(0, 16).reduce(( p, c ) => p + c, 0) / data.length
+            volume = !audioMute && audioVolume ? volume / (Math.log(audioVolume * 100) - Math.log(1.5)) / 1.5 - 2.25: 1
             MAX_PARTICLE_SPEED_MULTIPLE = volume
+            if(visualizerElement) {
+                for (let i = 0; i < visualizerElement.children.length; i++) {
+                    let height = data.slice(i * 3, (i + 1) * 3).reduce(( p, c ) => p + c, 0) / data.length * 20
+                    if (height > 100) {
+                        height = 100
+                    }
+                    visualizerElement.children[i].style.height = `${height}%`
+                }
+            }
         }
     }
-    volumeControl() {
-        audioVolume = document.getElementById("volume").value / 100
+    volumeControl(volume) {
+        if(volume === "mute") {
+            audioMute = !audioMute
+            if (audioMute) {
+                audioVolume = 0
+            } else {
+                audioVolume = audioVolumeSave
+            }
+        } else {
+            audioVolume = audioMute ? 0 : volume / 100
+            audioVolumeSave = audioVolume
+        }
         if (audioElement) {
             audioElement.volume = audioVolume
+        }
+        audioIconElement = document.getElementById("volumeIcon")
+        if (audioMute) {
+            audioIconElement.style.backgroundImage = `url(${volumeMute})`
+        }
+        else if (audioVolume === 0) {
+            audioIconElement.style.backgroundImage = `url(${volumeZero})`
+        }
+        else if (audioVolume < 0.5) {
+            audioIconElement.style.backgroundImage = `url(${volumeDown})`
+        }
+        else {
+            audioIconElement.style.backgroundImage = `url(${volumeUp})`
         }
     }
     preload(p5Lib) {
         p5 = p5Lib
-        audioVolume = document.getElementById("volume").value / 100
     }
     setup(p5Lib, canvasParentRef) {
 		p5.createCanvas(window.innerWidth, window.innerHeight + 11).parent(canvasParentRef)
@@ -94,7 +138,6 @@ export class p5MainScript {
 		p5.frameRate(30)
 		p5.noStroke()
         p5.smooth()
-        console.log(song)
 		// Simulation Systems
 		system = new ParticleSystem()
         triangles = new TriangleSystem()

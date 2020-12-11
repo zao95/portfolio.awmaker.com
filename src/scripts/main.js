@@ -1,37 +1,100 @@
+// P5 variable
 let MAX_PARTICLES = null  // ADD
 let MAX_TRIANGLES = null  //500 // ADD
 let MAX_PARTICLE_SPEED = 2  // 1.0;
+let MAX_PARTICLE_SPEED_MULTIPLE = 1  // 1.0;
 let SIZE = 2  //2;
 let LIFESPAN_DECREMENT = 2.0  //.5  //2.0
 let MAX_TRI_DISTANCE = 80  //50  //35 //25
 let MIN_TRI_DISTANCE = 15  //15  //10
 let MAX_PARTICLE_NEIGHBOURS = 10  //5;//10;//5;
-let MAX_WANDERER_SPEED = 6  //4;
+let MAX_WANDERER_SPEED = 4  //4;
 let SPAWN_DELAY = 20  //10
-let PARTICLE_LIFESPAN = 100
+let PARTICLE_LIFESPAN = 255
 let SPAWN_POS_RANDOM = 10
 let MAX_BRIGHTNESS = 120
-// Simulation Systems
+let MAX_SPAWNER = 0
 let system = null
 let triangles = null
-// Particle spawner
-let MAX_SPAWNER = null
-
 let spawners = []
-/* Global colour object */
 let colour = null
 let p5 = null
 let MAX_PARTICLE_DRAG = null
 let isActive = 0
+let song = null
+// Audio variable
+let audioElement = null
+let audioVolume = 0
+let audioCtx = null
+let analyser = null
+let source = null
+let data = null
 
 export class p5MainScript {
-    setup(p5Lib, canvasParentRef) {
+    async musicStart() {
+        console.log("musicPlay")
+        const createAnalyser = async () => {
+            audioElement = document.getElementById("bgm")
+            audioElement.volume = audioVolume
+            audioCtx = new AudioContext()
+            // 주파수 데이터 제공
+            analyser = audioCtx.createAnalyser()
+            // 분석기 리턴값 최대 크기
+            analyser.fftSize = 256
+            // DOM 내에서 돌리지 못하니, media element 생성
+            source = audioCtx.createMediaElementSource(audioElement)
+            // 노드와 스피커를 연결시켜준다.
+            source.connect(analyser)
+            source.connect(audioCtx.destination)
+            // analyser.connect(audioCtx.destination)
+            // 데이터 저장소 생성
+            data = new Uint8Array(analyser.frequencyBinCount)
+        }
+        if(!source) {
+            await createAnalyser()
+            .then(() => {
+                audioElement.play()
+            }).catch((e) => {
+                console.log("Create Analyser function error")
+                console.log(e)
+            })
+        }
+        else {
+            if (audioElement.paused) {
+                audioElement.play()
+            } else {
+                audioElement.pause()
+                MAX_PARTICLE_SPEED_MULTIPLE = 1
+            }
+        }
+    }
+    looping() {
+        if(audioCtx && !audioElement.paused) {
+            // data에 데이터를 넣어라
+            analyser.getByteFrequencyData(data)
+            let volume = (data.slice(0, 16).reduce(( p, c ) => p + c, 0) / data.length)
+            volume = audioVolume ? volume / (Math.log(audioVolume * 100) - Math.log(2)) / 1.5 - 3: 1
+            console.log("volume", volume)
+            MAX_PARTICLE_SPEED_MULTIPLE = volume
+        }
+    }
+    volumeControl() {
+        audioVolume = document.getElementById("volume").value / 100
+        if (audioElement) {
+            audioElement.volume = audioVolume
+        }
+    }
+    preload(p5Lib) {
         p5 = p5Lib
+        audioVolume = document.getElementById("volume").value / 100
+    }
+    setup(p5Lib, canvasParentRef) {
 		p5.createCanvas(window.innerWidth, window.innerHeight + 11).parent(canvasParentRef)
 		p5.clear()
 		p5.frameRate(30)
 		p5.noStroke()
-		p5.smooth()
+        p5.smooth()
+        console.log(song)
 		// Simulation Systems
 		system = new ParticleSystem()
         triangles = new TriangleSystem()
@@ -42,8 +105,8 @@ export class p5MainScript {
             MAX_PARTICLES = 50
             MAX_TRIANGLES = 150
         } else {
-            MAX_SPAWNER = 5
-            MAX_PARTICLE_DRAG = 4
+            MAX_SPAWNER = 4
+            MAX_PARTICLE_DRAG = 2
             MAX_PARTICLES = 500  // ADD
             MAX_TRIANGLES = 1500  //500 // ADD
         }
@@ -54,6 +117,7 @@ export class p5MainScript {
         colour = new ColourGenerator()
     }
     draw(p5) {
+        this.looping()
         isActive = 0
         p5.clear()
         // Clear Triangles
@@ -69,7 +133,7 @@ export class p5MainScript {
             spawners[i].update()
         }
         for (let i = 0; i < spawners.length; i++) {
-            system.addParticle(locationRandom(spawners[i].loc.x, spawners[i].loc.y))
+            !Math.round(p5.random(0, 2)) && system.addParticle(locationRandom(spawners[i].loc.x, spawners[i].loc.y))
         }
         // Update our particle and triangle systems each frame
         system.update()
@@ -135,8 +199,8 @@ class Particle {
     }
     move() {
         // Apply velocity to particle
-        this.pos.x += this.velocity.x
-        this.pos.y += this.velocity.y
+        this.pos.x += this.velocity.x * MAX_PARTICLE_SPEED_MULTIPLE
+        this.pos.y += this.velocity.y * MAX_PARTICLE_SPEED_MULTIPLE
         // Wrap around screen
         if (this.pos.x > p5.width) {
             this.pos.x -= p5.width

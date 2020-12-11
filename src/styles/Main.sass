@@ -29,5 +29,33 @@ $errorPoint: #db4b46
     background-repeat: repeat
     *
         font-family: 'Asap', Helvetica, Arial, sans-serif
-    iframe
-        transition: none
+    #musicBox
+        position: fixed
+        bottom: 50px
+        left: 50px
+        width: auto
+        height: auto
+        display: flex
+        flex-direction: row
+        align-items: center
+        #music_start
+            position: relative
+            width: 50px
+            height: 50px
+            background-color: blue
+        #volume-control
+            position: relative
+            top: 100%
+            border: 1px solid #aaa
+            background: #dedede
+            width: 80px
+            height: 32px
+            display: flex
+            flex-direction: row
+            justify-content: center
+            align-items: center
+            #volume
+                -webkit-appearance: slider-horizontal
+                width: calc(100% - 16px)
+        audio
+            visibility: hidden

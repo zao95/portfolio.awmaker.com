@@ -11,7 +11,7 @@ let MAX_TRIANGLES = null  //500 // ADD
 let MAX_PARTICLE_SPEED = 2  // 1.0;
 let MAX_PARTICLE_SPEED_MULTIPLE = 1  // 1.0;
 let SIZE = 2  //2;
-let LIFESPAN_DECREMENT = 2.0  //.5  //2.0
+let LIFESPAN_DECREMENT = 1.5  //.5  //2.0
 let MAX_TRI_DISTANCE = 80  //50  //35 //25
 let MIN_TRI_DISTANCE = 15  //15  //10
 let MAX_PARTICLE_NEIGHBOURS = 10  //5;//10;//5;
@@ -131,13 +131,6 @@ export class p5MainScript {
     }
     preload(p5Lib) {
         p5 = p5Lib
-    }
-    setup(p5Lib, canvasParentRef) {
-		p5.createCanvas(window.innerWidth, window.innerHeight + 11).parent(canvasParentRef)
-		p5.clear()
-		p5.frameRate(30)
-		p5.noStroke()
-        p5.smooth()
 		// Simulation Systems
 		system = new ParticleSystem()
         triangles = new TriangleSystem()
@@ -153,11 +146,26 @@ export class p5MainScript {
             MAX_PARTICLES = 500  // ADD
             MAX_TRIANGLES = 1500  //500 // ADD
         }
-        for (let i = 0; i < MAX_SPAWNER; i++) {
-            spawners.push(new Wanderer())
-        }
-		/* Global colour object */
         colour = new ColourGenerator()
+    }
+    setup(p5Lib, canvasParentRef) {
+		p5.createCanvas(window.innerWidth, window.innerHeight + 11).parent(canvasParentRef)
+		p5.clear()
+		p5.frameRate(30)
+		p5.noStroke()
+        p5.smooth()
+        // for (let i = 0; i < MAX_SPAWNER; i++) {
+        //     spawners.push(new Wanderer())
+        // }
+		/* Global colour object */
+        for (let i = 0; i < 100; i++) {
+            system.addParticle(this.locationRandom())
+        }
+    }
+    locationRandom() {
+        const x = p5.random(0, p5.width)
+        const y = p5.random(0, p5.height)
+        return p5.createVector(x, y)
     }
     draw(p5) {
         this.looping()
@@ -167,16 +175,19 @@ export class p5MainScript {
         triangles.clear()
         // Move spawner
         // Add particles at spawner location
-        const locationRandom = (locX, locY) => {
-            const x = locX + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
-            const y = locY + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
-            return p5.createVector(x, y)
-        }
-        for (let i = 0; i < spawners.length; i++) {
-            spawners[i].update()
-        }
-        for (let i = 0; i < spawners.length; i++) {
-            !Math.round(p5.random(0, 2)) && system.addParticle(locationRandom(spawners[i].loc.x, spawners[i].loc.y))
+        // const locationRandom = (locX, locY) => {
+        //     const x = locX + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
+        //     const y = locY + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
+        //     return p5.createVector(x, y)
+        // }
+        // for (let i = 0; i < spawners.length; i++) {
+        //     spawners[i].update()
+        // }
+        // for (let i = 0; i < spawners.length; i++) {
+        //     !Math.round(p5.random(0, 2)) && system.addParticle(locationRandom(spawners[i].loc.x, spawners[i].loc.y))
+        // }
+        for (let i = 0; i < 2; i++) {
+            system.addParticle(this.locationRandom())
         }
         // Update our particle and triangle systems each frame
         system.update()

@@ -27,35 +27,76 @@ $errorPoint: #db4b46
     background-image: url("../assets/images/pattern.png")
     background-size: auto
     background-repeat: repeat
+    &::before
+        z-index: 0
+        content: ""
+        position: absolute
+        top: 0
+        left: 0
+        width: 100vw
+        height: 100vh
+        background-image: url("../assets/images/background_gradient.png")
+        background-size: 100% 100%
+        background-repeat: no-repeat
+        opacity: 0.6
     *
         font-family: 'Asap', Helvetica, Arial, sans-serif
     #musicBox
+        z-index: 9
         position: fixed
-        bottom: 50px
-        left: 50px
+        bottom: 16px
+        left: 24px
         width: auto
-        height: auto
+        height: 24px
+        padding: 8px
         display: flex
         flex-direction: row
         align-items: center
-        #music_start
+        opacity: 0.8
+        &:hover
+            opacity: 1
+        #musicPlay
             position: relative
-            width: 50px
-            height: 50px
-            background-color: blue
-        #volume-control
+            width: 24px
+            height: 100%
+            background-image: url("../assets/icons/play_arrow.svg")
+            background-position: center center
+            background-size: contain
+            background-repeat: no-repeat
+        #volumeWrap
             position: relative
-            top: 100%
-            border: 1px solid #aaa
-            background: #dedede
-            width: 80px
-            height: 32px
+            height: 100%
             display: flex
             flex-direction: row
-            justify-content: center
             align-items: center
-            #volume
-                -webkit-appearance: slider-horizontal
-                width: calc(100% - 16px)
-        audio
+            #volumeIcon
+                position: relative
+                width: 20px
+                height: 100%
+                margin: 0 4px 0 16px
+                background-image: url("../assets/icons/volume_up.svg")
+                background-position: center center
+                background-size: contain
+                background-repeat: no-repeat
+            .volumeControl
+                width: 20px
+                height: 100%
+                display: flex
+                flex-direction: row
+                align-items: center
+        #visualizer
+            width: auto
+            height: 100%
+            padding-left: 16px
+            display: flex
+            flex-direction: row
+            align-items: flex-end
+            div
+                height: 0
+                margin-left: 4px
+                width: 3px
+                background-color: $black
+        #bgm
+            width: 0.1px
+            height: 0.1px
             visibility: hidden

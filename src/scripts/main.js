@@ -15,15 +15,15 @@ let LIFESPAN_DECREMENT = 1.5  //.5  //2.0
 let MAX_TRI_DISTANCE = 80  //50  //35 //25
 let MIN_TRI_DISTANCE = 15  //15  //10
 let MAX_PARTICLE_NEIGHBOURS = 10  //5;//10;//5;
-let MAX_WANDERER_SPEED = 4  //4;
+// let MAX_WANDERER_SPEED = 4  //4;
 let SPAWN_DELAY = 20  //10
 let PARTICLE_LIFESPAN = 255
-let SPAWN_POS_RANDOM = 10
+// let SPAWN_POS_RANDOM = 10
 let MAX_BRIGHTNESS = 120
-let MAX_SPAWNER = 0
+// let MAX_SPAWNER = 0
 let system = null
 let triangles = null
-let spawners = []
+// let spawners = []
 let colour = null
 let p5 = null
 let MAX_PARTICLE_DRAG = null
@@ -136,12 +136,12 @@ export class p5MainScript {
         triangles = new TriangleSystem()
         // Particle spawner
         if (window.innerWidth < 960) {
-            MAX_SPAWNER = 1
+            // MAX_SPAWNER = 1
             MAX_PARTICLE_DRAG = 1
             MAX_PARTICLES = 50
             MAX_TRIANGLES = 150
         } else {
-            MAX_SPAWNER = 4
+            // MAX_SPAWNER = 4
             MAX_PARTICLE_DRAG = 2
             MAX_PARTICLES = 500  // ADD
             MAX_TRIANGLES = 1500  //500 // ADD
@@ -215,7 +215,7 @@ export class p5MainScript {
     }
     windowResized(p5) {
         p5.resizeCanvas(window.innerWidth, window.innerHeight + 11)
-        window.innerWidth < 960 ? MAX_SPAWNER = 2 : MAX_SPAWNER = 5
+        // window.innerWidth < 960 ? MAX_SPAWNER = 2 : MAX_SPAWNER = 5
     }
 }
 
@@ -395,43 +395,43 @@ class TriangleSystem {
     }
 }
 
-class Wanderer {
-    constructor() {
-        this.loc = p5.createVector(p5.random(p5.width), p5.random(p5.height))
-        this.vel = p5.createVector(0, 0)
-        this.acc = p5.createVector(0, 0)
-        this.angle = null
-    }
-    update() {
-        // Move in random direction with random speed
-        this.angle += p5.random(0, p5.TWO_PI)
-        const magnitude = p5.random(0, 1.5) //3
-        // Work out force
-        this.acc.x += p5.cos(this.angle) * magnitude
-        this.acc.y += p5.sin(this.angle) * magnitude
-        // limit result
-        this.acc.limit(3)
-        // Add to current velocity
-        this.vel.add(this.acc)
-        this.vel.limit(MAX_WANDERER_SPEED)  //6);
-        // Appy result to current location
-        this.loc.add(this.vel)
-        // Wrap around screen
-        if (this.loc.x > p5.width) {
-            this.loc.x -= p5.width
-        }
-        if (this.loc.x < 0) {
-            this.loc.x += p5.width
-        }
-        if (this.loc.y > p5.height) {
-            this.loc.y -= p5.height
-        }
-        if (this.loc.y < 0) {
-            this.loc.y += p5.height
-        }
-    }
-    display() {
-        p5.fill(0);
-        p5.ellipse(this.loc.x, this.loc.y, 10, 10);
-    }
-}
+// class Wanderer {
+//     constructor() {
+//         this.loc = p5.createVector(p5.random(p5.width), p5.random(p5.height))
+//         this.vel = p5.createVector(0, 0)
+//         this.acc = p5.createVector(0, 0)
+//         this.angle = null
+//     }
+//     update() {
+//         // Move in random direction with random speed
+//         this.angle += p5.random(0, p5.TWO_PI)
+//         const magnitude = p5.random(0, 1.5) //3
+//         // Work out force
+//         this.acc.x += p5.cos(this.angle) * magnitude
+//         this.acc.y += p5.sin(this.angle) * magnitude
+//         // limit result
+//         this.acc.limit(3)
+//         // Add to current velocity
+//         this.vel.add(this.acc)
+//         this.vel.limit(MAX_WANDERER_SPEED)  //6);
+//         // Appy result to current location
+//         this.loc.add(this.vel)
+//         // Wrap around screen
+//         if (this.loc.x > p5.width) {
+//             this.loc.x -= p5.width
+//         }
+//         if (this.loc.x < 0) {
+//             this.loc.x += p5.width
+//         }
+//         if (this.loc.y > p5.height) {
+//             this.loc.y -= p5.height
+//         }
+//         if (this.loc.y < 0) {
+//             this.loc.y += p5.height
+//         }
+//     }
+//     display() {
+//         p5.fill(0);
+//         p5.ellipse(this.loc.x, this.loc.y, 10, 10);
+//     }
+// }

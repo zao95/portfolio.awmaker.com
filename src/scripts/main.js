@@ -47,6 +47,27 @@ export class p5MainScript {
     constructor(setMixFunction) {
         this.setMixBlend = setMixFunction
     }
+    musicState(mode) {
+        const target = document.getElementById("musicState")
+        if(mode === "play") {
+            audioElement.play()
+            audioPlayIconElement.style.backgroundImage = `url(${pause})`
+            target.style.backgroundImage = `url(${playArrow})`
+        }
+        if(mode === "pause") {
+            audioElement.pause()
+            MAX_PARTICLE_SPEED_MULTIPLE = 1
+            audioPlayIconElement.style.backgroundImage = `url(${playArrow})`
+            if(visualizerElement) {
+                for (let i = 0; i < visualizerElement.children.length; i++) {
+                    visualizerElement.children[i].style.height = `0`
+                }
+            }
+            target.style.backgroundImage = `url(${pause})`
+        }
+        const newone = target.cloneNode(true)
+        target.parentNode.replaceChild(newone, target)
+    }
     async musicPlay() {
         const createAnalyser = async () => {
             audioElement = document.getElementById("bgm")
@@ -83,27 +104,6 @@ export class p5MainScript {
                 this.musicState("pause")
             }
         }
-    }
-    musicState(mode) {
-        const target = document.getElementById("musicState")
-        if(mode === "play") {
-            audioElement.play()
-            audioPlayIconElement.style.backgroundImage = `url(${pause})`
-            target.style.backgroundImage = `url(${playArrow})`
-        }
-        if(mode === "pause") {
-            audioElement.pause()
-            MAX_PARTICLE_SPEED_MULTIPLE = 1
-            audioPlayIconElement.style.backgroundImage = `url(${playArrow})`
-            if(visualizerElement) {
-                for (let i = 0; i < visualizerElement.children.length; i++) {
-                    visualizerElement.children[i].style.height = `0`
-                }
-            }
-            target.style.backgroundImage = `url(${pause})`
-        }
-        const newone = target.cloneNode(true)
-        target.parentNode.replaceChild(newone, target)
     }
     looping() {
         if(audioCtx && !audioElement.paused) {
@@ -228,7 +228,9 @@ export class p5MainScript {
         mouseClicked = 1
     }
     mouseClicked() {
-        mouseClicked && this.musicPlay()
+        if (p5.mouseY < p5.height && mouseClicked) {
+            this.musicPlay()
+        }
     }
     mouseDragged(p5) {
         if (isActive) {

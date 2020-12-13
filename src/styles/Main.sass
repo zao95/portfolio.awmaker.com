@@ -110,6 +110,8 @@ $errorPoint: #db4b46
         height: 100px
         opacity: 0.8
         transition: all 0.5s ease
+        mix-blend-mode: difference
+        filter: invert(100%)
         > p
             position: relative
             bottom: 8px
@@ -126,13 +128,11 @@ $errorPoint: #db4b46
             display: block
             width: 25px
             height: 25px
-            border-bottom: 5px solid $white
-            border-right: 5px solid $white
+            border-bottom: 5px solid $black
+            border-right: 5px solid $black
             transform: rotate(45deg)
             margin: -15px
             animation: scrollDown 1.4s infinite
-            mix-blend-mode: difference
-            filter: invert(100%)
         .arrow span:nth-child(2)
             animation-delay: -0.2s
         .arrow span:nth-child(3)

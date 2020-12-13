@@ -8,22 +8,23 @@ import pause from "../assets/icons/pause.svg"
 // P5 variable
 let MAX_PARTICLES = null  // ADD
 let MAX_TRIANGLES = null  //500 // ADD
+let PARTICLE_FREQUENCY = 0.9  // 1.0
 let MAX_PARTICLE_SPEED = 2  // 1.0;
 let MAX_PARTICLE_SPEED_MULTIPLE = 1  // 1.0;
 let SIZE = 2  //2;
-let LIFESPAN_DECREMENT = 1.5  //.5  //2.0
+let LIFESPAN_DECREMENT = 1.4  //.5  //2.0
 let MAX_TRI_DISTANCE = 80  //50  //35 //25
 let MIN_TRI_DISTANCE = 15  //15  //10
 let MAX_PARTICLE_NEIGHBOURS = 10  //5;//10;//5;
-// let MAX_WANDERER_SPEED = 4  //4;
+let MAX_WANDERER_SPEED = 5  //4;
 let SPAWN_DELAY = 20  //10
 let PARTICLE_LIFESPAN = 255
-// let SPAWN_POS_RANDOM = 10
+let SPAWN_POS_RANDOM = 10
 let MAX_BRIGHTNESS = 120
-// let MAX_SPAWNER = 0
+let MAX_SPAWNER = 0
 let system = null
 let triangles = null
-// let spawners = []
+let spawners = []
 let colour = null
 let p5 = null
 let MAX_PARTICLE_DRAG = null
@@ -41,6 +42,9 @@ let data = null
 let visualizerElement = null
 
 export class p5MainScript {
+    constructor(setMixFunction) {
+        this.setMixBlend = setMixFunction
+    }
     async musicPlay() {
         const createAnalyser = async () => {
             audioElement = document.getElementById("bgm")
@@ -79,6 +83,11 @@ export class p5MainScript {
                 audioElement.pause()
                 MAX_PARTICLE_SPEED_MULTIPLE = 1
                 audioPlayIconElement.style.backgroundImage = `url(${playArrow})`
+                if(visualizerElement) {
+                    for (let i = 0; i < visualizerElement.children.length; i++) {
+                        visualizerElement.children[i].style.height = `0`
+                    }
+                }
             }
         }
     }
@@ -129,24 +138,32 @@ export class p5MainScript {
             audioIconElement.style.backgroundImage = `url(${volumeUp})`
         }
     }
-    preload(p5Lib) {
+    async preload(p5Lib) {
         p5 = p5Lib
 		// Simulation Systems
 		system = new ParticleSystem()
         triangles = new TriangleSystem()
         // Particle spawner
         if (window.innerWidth < 960) {
-            // MAX_SPAWNER = 1
+            MAX_SPAWNER = 1
             MAX_PARTICLE_DRAG = 1
             MAX_PARTICLES = 50
             MAX_TRIANGLES = 150
         } else {
-            // MAX_SPAWNER = 4
+            MAX_SPAWNER = 4
             MAX_PARTICLE_DRAG = 2
             MAX_PARTICLES = 500  // ADD
-            MAX_TRIANGLES = 1500  //500 // ADD
+            MAX_TRIANGLES = 2500  //500 // ADD
         }
         colour = new ColourGenerator()
+
+        this.setMixBlend(true)
+        document.getElementById("root").style.height = "auto"
+        document.getElementById("root").style.overflow = "auto"
+        document.getElementById("loadingContainer").remove()
+        setTimeout(() => {
+            window.scrollTo(0, 0)
+        }, 100)
     }
     setup(p5Lib, canvasParentRef) {
 		p5.createCanvas(window.innerWidth, window.innerHeight + 11).parent(canvasParentRef)
@@ -154,13 +171,13 @@ export class p5MainScript {
 		p5.frameRate(30)
 		p5.noStroke()
         p5.smooth()
-        // for (let i = 0; i < MAX_SPAWNER; i++) {
-        //     spawners.push(new Wanderer())
-        // }
-		/* Global colour object */
-        for (let i = 0; i < 100; i++) {
-            system.addParticle(this.locationRandom())
+        for (let i = 0; i < MAX_SPAWNER; i++) {
+            spawners.push(new Wanderer())
         }
+		/* Global colour object */
+        // for (let i = 0; i < 100; i++) {
+        //     system.addParticle(this.locationRandom())
+        // }
     }
     locationRandom() {
         const x = p5.random(0, p5.width)
@@ -175,20 +192,20 @@ export class p5MainScript {
         triangles.clear()
         // Move spawner
         // Add particles at spawner location
-        // const locationRandom = (locX, locY) => {
-        //     const x = locX + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
-        //     const y = locY + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
-        //     return p5.createVector(x, y)
-        // }
-        // for (let i = 0; i < spawners.length; i++) {
-        //     spawners[i].update()
-        // }
-        // for (let i = 0; i < spawners.length; i++) {
-        //     !Math.round(p5.random(0, 2)) && system.addParticle(locationRandom(spawners[i].loc.x, spawners[i].loc.y))
-        // }
-        for (let i = 0; i < 2; i++) {
-            system.addParticle(this.locationRandom())
+        const locationRandom = (locX, locY) => {
+            const x = locX + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
+            const y = locY + p5.random(-SPAWN_POS_RANDOM, SPAWN_POS_RANDOM)
+            return p5.createVector(x, y)
         }
+        for (let i = 0; i < spawners.length; i++) {
+            spawners[i].update()
+        }
+        for (let i = 0; i < spawners.length; i++) {
+            !Math.round(p5.random(0, PARTICLE_FREQUENCY)) && system.addParticle(locationRandom(spawners[i].loc.x, spawners[i].loc.y))
+        }
+        // for (let i = 0; i < 2; i++) {
+        //     system.addParticle(this.locationRandom())
+        // }
         // Update our particle and triangle systems each frame
         system.update()
         triangles.display()
@@ -395,43 +412,43 @@ class TriangleSystem {
     }
 }
 
-// class Wanderer {
-//     constructor() {
-//         this.loc = p5.createVector(p5.random(p5.width), p5.random(p5.height))
-//         this.vel = p5.createVector(0, 0)
-//         this.acc = p5.createVector(0, 0)
-//         this.angle = null
-//     }
-//     update() {
-//         // Move in random direction with random speed
-//         this.angle += p5.random(0, p5.TWO_PI)
-//         const magnitude = p5.random(0, 1.5) //3
-//         // Work out force
-//         this.acc.x += p5.cos(this.angle) * magnitude
-//         this.acc.y += p5.sin(this.angle) * magnitude
-//         // limit result
-//         this.acc.limit(3)
-//         // Add to current velocity
-//         this.vel.add(this.acc)
-//         this.vel.limit(MAX_WANDERER_SPEED)  //6);
-//         // Appy result to current location
-//         this.loc.add(this.vel)
-//         // Wrap around screen
-//         if (this.loc.x > p5.width) {
-//             this.loc.x -= p5.width
-//         }
-//         if (this.loc.x < 0) {
-//             this.loc.x += p5.width
-//         }
-//         if (this.loc.y > p5.height) {
-//             this.loc.y -= p5.height
-//         }
-//         if (this.loc.y < 0) {
-//             this.loc.y += p5.height
-//         }
-//     }
-//     display() {
-//         p5.fill(0);
-//         p5.ellipse(this.loc.x, this.loc.y, 10, 10);
-//     }
-// }
+class Wanderer {
+    constructor() {
+        this.loc = p5.createVector(p5.random(p5.width), p5.random(p5.height))
+        this.vel = p5.createVector(0, 0)
+        this.acc = p5.createVector(0, 0)
+        this.angle = null
+    }
+    update() {
+        // Move in random direction with random speed
+        this.angle += p5.random(0, p5.TWO_PI)
+        const magnitude = p5.random(0, 1.5) //3
+        // Work out force
+        this.acc.x += p5.cos(this.angle) * magnitude
+        this.acc.y += p5.sin(this.angle) * magnitude
+        // limit result
+        this.acc.limit(3)
+        // Add to current velocity
+        this.vel.add(this.acc)
+        this.vel.limit(MAX_WANDERER_SPEED * MAX_PARTICLE_SPEED_MULTIPLE)  //6);
+        // Appy result to current location
+        this.loc.add(this.vel)
+        // Wrap around screen
+        if (this.loc.x > p5.width) {
+            this.loc.x -= p5.width
+        }
+        if (this.loc.x < 0) {
+            this.loc.x += p5.width
+        }
+        if (this.loc.y > p5.height) {
+            this.loc.y -= p5.height
+        }
+        if (this.loc.y < 0) {
+            this.loc.y += p5.height
+        }
+    }
+    display() {
+        p5.fill(0);
+        p5.ellipse(this.loc.x, this.loc.y, 10, 10);
+    }
+}

@@ -37,7 +37,7 @@ const Main = () => {
 	return (
 		<>
             <div id="Main" className="pageWrap" style={{justifyContent: "center"}}>
-				<div id="musicBox" onMouseLeave={() => SliderView(1)}>
+				<div id="musicBox" onMouseDown={(e) => e.stopPropagation()} onMouseLeave={() => SliderView(1)}>
 					<div id="musicPlay" onClick={p5Main.musicPlay}/>
 					<div id="volumeWrap" ref={volumeControlWrap} onMouseOver={() => SliderView(0)}>
 						<div id="volumeIcon" ref={volumeIcon} onClick={() => p5Main.volumeControl("mute")}/>
@@ -88,6 +88,12 @@ const Main = () => {
 					windowResized={(p5) => {
 						p5Main.windowResized(p5)
 					}}
+					mousePressed={(p5) => {
+						p5Main.mousePressed(p5)
+					}}
+					mouseClicked={(p5) => {
+						p5Main.mouseClicked(p5)
+					}}
 					mouseDragged={(p5) => {
 						p5Main.mouseDragged(p5)
 					}}
@@ -96,11 +102,15 @@ const Main = () => {
 					}}
 				/>
 				<div id="scrollAnimate">
+					<p className="condensed">SCROLL DOWN</p>
 					<div className="arrow">
 						<span></span>
 						<span></span>
 						<span></span>
 					</div>
+				</div>
+				<div id="musicStateWrap">
+					<div id="musicState" />
 				</div>
 			</div>
 		</>

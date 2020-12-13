@@ -32,6 +32,7 @@ let isActive = 0
 // Audio variable
 let audioElement = null
 let audioIconElement = null
+let audioPlayIconElement = null
 let audioVolumeSave = 1
 let audioVolume = 1
 let audioMute = false
@@ -40,6 +41,7 @@ let analyser = null
 let source = null
 let data = null
 let visualizerElement = null
+let mouseClicked = 0
 
 export class p5MainScript {
     constructor(setMixFunction) {
@@ -62,14 +64,13 @@ export class p5MainScript {
             // analyser.connect(audioCtx.destination)
             // 데이터 저장소 생성
             data = new Uint8Array(analyser.frequencyBinCount)
+            visualizerElement = document.getElementById("visualizer")
+            audioPlayIconElement = document.getElementById("musicPlay")
         }
-        visualizerElement = document.getElementById("visualizer")
-        const audioPlayIconElement = document.getElementById("musicPlay")
         if(!source) {
             await createAnalyser()
             .then(() => {
-                audioElement.play()
-                audioPlayIconElement.style.backgroundImage = `url(${pause})`
+                this.musicState("play")
             }).catch((e) => {
                 console.log("Create Analyser function error")
                 console.log(e)
@@ -77,19 +78,32 @@ export class p5MainScript {
         }
         else {
             if (audioElement.paused) {
-                audioElement.play()
-                audioPlayIconElement.style.backgroundImage = `url(${pause})`
+                this.musicState("play")
             } else {
-                audioElement.pause()
-                MAX_PARTICLE_SPEED_MULTIPLE = 1
-                audioPlayIconElement.style.backgroundImage = `url(${playArrow})`
-                if(visualizerElement) {
-                    for (let i = 0; i < visualizerElement.children.length; i++) {
-                        visualizerElement.children[i].style.height = `0`
-                    }
-                }
+                this.musicState("pause")
             }
         }
+    }
+    musicState(mode) {
+        const target = document.getElementById("musicState")
+        if(mode === "play") {
+            audioElement.play()
+            audioPlayIconElement.style.backgroundImage = `url(${pause})`
+            target.style.backgroundImage = `url(${playArrow})`
+        }
+        if(mode === "pause") {
+            audioElement.pause()
+            MAX_PARTICLE_SPEED_MULTIPLE = 1
+            audioPlayIconElement.style.backgroundImage = `url(${playArrow})`
+            if(visualizerElement) {
+                for (let i = 0; i < visualizerElement.children.length; i++) {
+                    visualizerElement.children[i].style.height = `0`
+                }
+            }
+            target.style.backgroundImage = `url(${pause})`
+        }
+        const newone = target.cloneNode(true)
+        target.parentNode.replaceChild(newone, target)
     }
     looping() {
         if(audioCtx && !audioElement.paused) {
@@ -210,8 +224,17 @@ export class p5MainScript {
         system.update()
         triangles.display()
     }
+    mousePressed() {
+        mouseClicked = 1
+    }
+    mouseClicked() {
+        mouseClicked && this.musicPlay()
+    }
     mouseDragged(p5) {
-        if(isActive < MAX_PARTICLE_DRAG && system) {
+        if (isActive) {
+            mouseClicked = 0
+        }
+        if (isActive < MAX_PARTICLE_DRAG && system) {
             isActive += 1
             let posX = p5.mouseX
             let posY = p5.mouseY
@@ -430,7 +453,11 @@ class Wanderer {
         this.acc.limit(3)
         // Add to current velocity
         this.vel.add(this.acc)
-        this.vel.limit(MAX_WANDERER_SPEED * MAX_PARTICLE_SPEED_MULTIPLE)  //6);
+        if (MAX_PARTICLE_SPEED_MULTIPLE < 1) {
+            this.vel.limit(MAX_WANDERER_SPEED * MAX_PARTICLE_SPEED_MULTIPLE)  //6);
+        } else {
+            this.vel.limit(MAX_WANDERER_SPEED)
+        }
         // Appy result to current location
         this.loc.add(this.vel)
         // Wrap around screen

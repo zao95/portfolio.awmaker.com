@@ -6,14 +6,9 @@ import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import "../styles/Main.sass"
 
-// 할 것
-// 1. 	중앙 부분에 특정 텍스트 모양으로 두껍게 고정 파티클 넣기
-// 		로고 테두리 따라서 파티클 넣고,
-// 		음악에 맞춰서 확대/축소 반복하기
-// 2. 	로딩 페이지 제작해서, p5 로드 끝나면 없애기
 const Main = () => {
-	const p5Main = new p5MainScript()
 	const [mixBlend, setMixBlend] = useState(false)
+	const p5Main = new p5MainScript(setMixBlend)
 	const volumeIcon = useRef(null)
 	const volumeControlWrap = useRef(null)
 	const SliderView = (e) => {
@@ -24,12 +19,18 @@ const Main = () => {
 	}
 	useEffect(() => {
 		if (!mixBlend) {
+			document.getElementById("nav").style.mixBlendMode = "normal"
+			document.getElementById("nav").style.filter = "none"
+			document.getElementById("musicBox").style.mixBlendMode = "normal"
+			document.getElementById("musicBox").style.filter = "none"
+			document.getElementById("scrollAnimate").style.opacity = "0.8"
 			window.addEventListener('scroll', (e) => {
 				setMixBlend(true)
 				document.getElementById("nav").style.mixBlendMode = "difference"
 				document.getElementById("nav").style.filter = "invert(100%)"
 				document.getElementById("musicBox").style.mixBlendMode = "difference"
 				document.getElementById("musicBox").style.filter = "invert(100%)"
+				document.getElementById("scrollAnimate").style.opacity = "0"
 			})
 		}
 	}, [mixBlend])
@@ -94,6 +95,13 @@ const Main = () => {
 						p5Main.touchStarted(p5)
 					}}
 				/>
+				<div id="scrollAnimate">
+					<div className="arrow">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
 			</div>
 		</>
 	)

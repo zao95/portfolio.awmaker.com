@@ -38,7 +38,7 @@ const Main = () => {
 		<>
             <div id="Main" className="pageWrap" style={{justifyContent: "center"}}>
 				<div id="musicBox" onMouseDown={(e) => e.stopPropagation()} onMouseLeave={() => SliderView(1)}>
-					<div id="musicPlay" onClick={p5Main.musicPlay}/>
+					<div id="musicPlay" onClick={() => p5Main.musicPlay()}/>
 					<div id="volumeWrap" ref={volumeControlWrap} onMouseOver={() => SliderView(0)}>
 						<div id="volumeIcon" ref={volumeIcon} onClick={() => p5Main.volumeControl("mute")}/>
 						<Slider

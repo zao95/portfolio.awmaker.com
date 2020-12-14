@@ -32,7 +32,7 @@ const Nav = () => {
         window.scrollTo(0, absoluteTop)
     }
 	return (
-        <nav id="nav">
+        <nav id="nav" onClick={(e) => e.stopPropagation()}>
             <div className="logo clickable" onClick={() => handleClick(0)} />
             <ul ref={ulElement}>
                 <li className="condensed clickable" onClick={() => handleClick(1)}></li>

@@ -38,15 +38,15 @@ const Main = () => {
 		<>
             <div id="Main" className="pageWrap" style={{justifyContent: "center"}}>
 				<div id="musicBox" onMouseDown={(e) => e.stopPropagation()} onMouseLeave={() => SliderView(1)}>
-					<div id="musicPlay" onClick={p5Main.musicPlay}/>
-					<div id="volumeWrap" ref={volumeControlWrap} onMouseOver={() => SliderView(0)}>
+					<div id="musicPlay" onClick={(e) => {p5Main.musicPlay(); e.stopPropagation()}} />
+					<div id="volumeWrap" onClick={(e) => e.stopPropagation()} ref={volumeControlWrap} onMouseOver={() => SliderView(0)}>
 						<div id="volumeIcon" ref={volumeIcon} onClick={() => p5Main.volumeControl("mute")}/>
 						<Slider
 							className="volumeControl"
 							defaultValue={100}
 							min={0}
 							max={100}
-							onChange={p5Main.volumeControl}
+							onChange={(val) => p5Main.volumeControl(val)}
 							trackStyle={{backgroundColor: "#000"}}
 							railStyle={{backgroundColor: "#000"}}
 							handleStyle={{borderColor: "#000"}}

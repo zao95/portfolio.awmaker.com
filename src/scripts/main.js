@@ -68,7 +68,7 @@ export class p5MainScript {
         const newone = target.cloneNode(true)
         target.parentNode.replaceChild(newone, target)
     }
-    async musicPlay() {
+    musicPlay() {
         const createAnalyser = async () => {
             audioElement = document.getElementById("bgm")
             audioElement.volume = audioVolume
@@ -89,7 +89,7 @@ export class p5MainScript {
             audioPlayIconElement = document.getElementById("musicPlay")
         }
         if(!source) {
-            await createAnalyser()
+            createAnalyser()
             .then(() => {
                 this.musicState("play")
             }).catch((e) => {

@@ -154,9 +154,27 @@ $errorPoint: #db4b46
             background-position: center center
             background-repeat: no-repeat
             background-size: contain
-            animation: musicStatePopup 1.4s
+            animation: fadeout 1.4s
             animation-iteration-count: 1
-            filter: blur(8px)
+            filter: blur(4px)
+            opacity: 0
+    #mainPageTitle
+        position: absolute
+        bottom: 8vh
+        right: 12vw
+        opacity: 1
+        p
+            font-size: 1.4em
+            font-weight: 700
+            margin-top: 16px
+            text-transform: uppercase
+            text-align: right
+            filter: blur(0px)
+            &:nth-child(1)
+                font-weight: 400
+        &.fadeout
+            animation: fadeout2 1s
+            animation-iteration-count: 1
             opacity: 0
 
 @keyframes scrollDown
@@ -169,7 +187,14 @@ $errorPoint: #db4b46
         opacity: 0
         transform: rotate(45deg) translate(20px,20px)
 
-@keyframes musicStatePopup
+@keyframes fadeout2
+    0%
+        opacity: 1
+        filter: blur(0px)
+    100%
+        opacity: 0
+        filter: blur(32px)
+@keyframes fadeout
     0%
         opacity: 0.6
         filter: blur(4px)

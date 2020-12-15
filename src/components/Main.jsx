@@ -24,7 +24,6 @@ const Main = () => {
 			document.getElementById("musicBox").style.mixBlendMode = "normal"
 			document.getElementById("musicBox").style.filter = "none"
 			document.getElementById("scrollAnimate").style.opacity = "0.8"
-			document.getElementById("mainPageTitle").classList.remove("fadeout")
 			window.addEventListener('scroll', (e) => {
 				setMixBlend(true)
 				document.getElementById("nav").style.mixBlendMode = "difference"
@@ -32,7 +31,6 @@ const Main = () => {
 				document.getElementById("musicBox").style.mixBlendMode = "difference"
 				document.getElementById("musicBox").style.filter = "invert(100%)"
 				document.getElementById("scrollAnimate").style.opacity = "0"
-				document.getElementById("mainPageTitle").classList.add("fadeout")
 			})
 		}
 	}, [mixBlend])

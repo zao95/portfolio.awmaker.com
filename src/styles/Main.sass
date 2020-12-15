@@ -161,16 +161,19 @@ $errorPoint: #db4b46
     #mainPageTitle
         position: absolute
         bottom: 8vh
-        right: 12vw
+        right: 8vw
         opacity: 1
+        mix-blend-mode: difference
+        filter: invert(100%)
         p
-            font-size: 1.4em
+            font-size: 4.6em
             font-weight: 700
             margin-top: 16px
             text-transform: uppercase
             text-align: right
             filter: blur(0px)
             &:nth-child(1)
+                font-size: 1.6em
                 font-weight: 400
         &.fadeout
             animation: fadeout2 1s

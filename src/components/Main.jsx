@@ -115,7 +115,7 @@ const Main = () => {
 					<div id="musicState" />
 				</div>
 				<div id="mainPageTitle">
-					<p className="condensed">Front-end Developer &amp; Designer</p>
+					<p className="condensed">Front-end Developer</p>
 					<p className="condensed">Lee Jeong-Woo</p>
 				</div>
 			</div>

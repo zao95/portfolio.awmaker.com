@@ -46,7 +46,7 @@ const Contents = () => {
 						</div>
 					</div>
 					<div className="mockup" style={{backgroundImage: `url(${mockup})`}} />
-					<SwiperComponent contents={slideContents} />
+					<SwiperComponent contents={slideContents} application />
 				</div>
 			</div>
 		</>

@@ -16,7 +16,7 @@ const Index = () => {
             <Controller>
                 <Scene
                     triggerHook="onLeave"
-                    duration={1800}
+                    duration={1200}
                     pin
                 >
                     {(progress) => {

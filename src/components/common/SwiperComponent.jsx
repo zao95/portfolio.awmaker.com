@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import SwiperCore, { Navigation, Pagination, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
@@ -21,13 +21,19 @@ const SwiperComponent = (props) => {
     props.contents.forEach((el, idx) => {
         components.push(<SwiperSlide key={idx}>{el}</SwiperSlide>)
     })
+    const [width, setWidth] = useState(window.innerWidth)
+    useEffect(() => {
+        setWidth(window.innerWidth)
+        console.log(width)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [window.innerWidth])
     return (
         <Swiper
             grabCursor={true}
             centeredSlides={true}
             loop={true}
             spaceBetween={50}
-            slidesPerView="auto"
+            slidesPerView={props.application === true ? 3 : 1}
             navigation
             pagination={{ clickable: true, dynamicBullets: true }}
             // onSwiper={(swiper) => console.log(swiper)}

@@ -8,6 +8,9 @@ import slide03 from "../../../assets/slides/02/03.png"
 import slide04 from "../../../assets/slides/02/04.png"
 import slide05 from "../../../assets/slides/02/05.png"
 import slide06 from "../../../assets/slides/02/06.png"
+import slide07 from "../../../assets/slides/02/07.png"
+import slide08 from "../../../assets/slides/02/08.png"
+import slide09 from "../../../assets/slides/02/09.png"
 
 const Contents = () => {
 	const slideContents = [
@@ -20,6 +23,9 @@ const Contents = () => {
 		<div style={{backgroundImage: `url(${slide04})`}}></div>,
 		<div style={{backgroundImage: `url(${slide05})`}}></div>,
 		<div style={{backgroundImage: `url(${slide06})`}}></div>,
+		<div style={{backgroundImage: `url(${slide07})`}}></div>,
+		<div style={{backgroundImage: `url(${slide08})`}}></div>,
+		<div style={{backgroundImage: `url(${slide09})`}}></div>,
 	]
 	return (
 		<>

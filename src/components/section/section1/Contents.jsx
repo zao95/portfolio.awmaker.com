@@ -4,7 +4,8 @@ import SwiperComponent from "../../common/SwiperComponent"
 import onlinePortfolioVideo from "../../../assets/video/online_portfolio.mp4"
 import slide01 from "../../../assets/slides/01/01.png"
 import slide02 from "../../../assets/slides/01/02.jpg"
-import slide03 from "../../../assets/slides/01/03.png"
+import slide03 from "../../../assets/slides/01/03.jpg"
+import slide04 from "../../../assets/slides/01/04.png"
 
 const Contents = () => {
 	const slideContents = [
@@ -14,6 +15,7 @@ const Contents = () => {
 		<div style={{backgroundImage: `url(${slide01})`}}></div>,
 		<div style={{backgroundImage: `url(${slide02})`}}></div>,
 		<div style={{backgroundImage: `url(${slide03})`}}></div>,
+		<div style={{backgroundImage: `url(${slide04})`}}></div>,
 	]
 	return (
 		<>

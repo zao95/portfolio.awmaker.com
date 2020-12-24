@@ -74,3 +74,32 @@ a, a:visited, a:active, a:hover
 
 .hiddenVisible
     visibility: hidden
+
+#onTheTop
+    z-index: 9
+    position: fixed
+    width: 24px
+    height: 24px
+    border-radius: 50%
+    bottom: 24px
+    right: 24px
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.42)
+    background-color: rgba(255, 255, 255, 0.24)
+    cursor: pointer
+    mix-blend-mode: difference
+    filter: invert(100%)
+    display: flex
+    justify-content: center
+    align-items: center
+    .button
+        width: 80%
+        height: 80%
+        border-radius: 50%
+        background-image: url("../../assets/icons/play_arrow.svg")
+        background-position: center center
+        background-repeat: no-repeat
+        background-size: contain
+        transform: rotate(-90deg)
+        opacity: 0.6
+        &:hover
+            opcaity: 1

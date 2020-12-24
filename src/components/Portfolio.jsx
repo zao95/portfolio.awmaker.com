@@ -22,6 +22,9 @@ const Portfolio = () => {
 			<Main />
 			<Sections />
 			<Footer />
+			<div id="onTheTop" onClick={() => {window.scrollTo(0, 0)}}>
+				<div className="button" />
+			</div>
 		</>
 	)
 }

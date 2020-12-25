@@ -1,28 +1,38 @@
 import React from 'react'
-import mockup from "../../../assets/images/online_portfolio_mockup.png"
+import mockup from "../../../assets/images/countap_mockup.png"
 import SwiperComponent from "../../common/SwiperComponent"
-import onlinePortfolioVideo from "../../../assets/video/online_portfolio.mp4"
+import slide00 from "../../../assets/slides/01/00.mp4"
 import slide01 from "../../../assets/slides/01/01.png"
-import slide02 from "../../../assets/slides/01/02.jpg"
-import slide03 from "../../../assets/slides/01/03.jpg"
+import slide02 from "../../../assets/slides/01/02.png"
+import slide03 from "../../../assets/slides/01/03.png"
 import slide04 from "../../../assets/slides/01/04.png"
+import slide05 from "../../../assets/slides/01/05.png"
+import slide06 from "../../../assets/slides/01/06.png"
+import slide07 from "../../../assets/slides/01/07.png"
+import slide08 from "../../../assets/slides/01/08.png"
+import slide09 from "../../../assets/slides/01/09.png"
 
 const Contents = () => {
 	const slideContents = [
 		<video controls>
-			<source src={onlinePortfolioVideo} type="video/mp4"></source>
+			<source src={slide00} type="video/mp4"></source>
 		</video>,
 		<div style={{backgroundImage: `url(${slide01})`}}></div>,
 		<div style={{backgroundImage: `url(${slide02})`}}></div>,
 		<div style={{backgroundImage: `url(${slide03})`}}></div>,
 		<div style={{backgroundImage: `url(${slide04})`}}></div>,
+		<div style={{backgroundImage: `url(${slide05})`}}></div>,
+		<div style={{backgroundImage: `url(${slide06})`}}></div>,
+		<div style={{backgroundImage: `url(${slide07})`}}></div>,
+		<div style={{backgroundImage: `url(${slide08})`}}></div>,
+		<div style={{backgroundImage: `url(${slide09})`}}></div>,
 	]
 	return (
 		<>
             <div id="section1Contents" className="contentsPageWrap pageWrap">
 				<div className="contentsWrap">
 					<p className="title condensed">
-						CONVERGENCE OF 2D AND 3D WEBGL
+						Sharing Accounting Book
 					</p>
 					<div className="mainWrap">
 						<div className="leftWrap">

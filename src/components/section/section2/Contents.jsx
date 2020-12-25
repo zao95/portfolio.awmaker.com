@@ -1,38 +1,28 @@
 import React from 'react'
-import mockup from "../../../assets/images/countap_mockup.png"
+import mockup from "../../../assets/images/online_portfolio_mockup.png"
 import SwiperComponent from "../../common/SwiperComponent"
-import slide00 from "../../../assets/slides/02/00.mp4"
+import onlinePortfolioVideo from "../../../assets/video/online_portfolio.mp4"
 import slide01 from "../../../assets/slides/02/01.png"
 import slide02 from "../../../assets/slides/02/02.png"
-import slide03 from "../../../assets/slides/02/03.png"
+import slide03 from "../../../assets/slides/02/03.jpg"
 import slide04 from "../../../assets/slides/02/04.png"
-import slide05 from "../../../assets/slides/02/05.png"
-import slide06 from "../../../assets/slides/02/06.png"
-import slide07 from "../../../assets/slides/02/07.png"
-import slide08 from "../../../assets/slides/02/08.png"
-import slide09 from "../../../assets/slides/02/09.png"
 
 const Contents = () => {
 	const slideContents = [
 		<video controls>
-			<source src={slide00} type="video/mp4"></source>
+			<source src={onlinePortfolioVideo} type="video/mp4"></source>
 		</video>,
 		<div style={{backgroundImage: `url(${slide01})`}}></div>,
 		<div style={{backgroundImage: `url(${slide02})`}}></div>,
 		<div style={{backgroundImage: `url(${slide03})`}}></div>,
 		<div style={{backgroundImage: `url(${slide04})`}}></div>,
-		<div style={{backgroundImage: `url(${slide05})`}}></div>,
-		<div style={{backgroundImage: `url(${slide06})`}}></div>,
-		<div style={{backgroundImage: `url(${slide07})`}}></div>,
-		<div style={{backgroundImage: `url(${slide08})`}}></div>,
-		<div style={{backgroundImage: `url(${slide09})`}}></div>,
 	]
 	return (
 		<>
             <div id="section2Contents" className="contentsPageWrap pageWrap">
 				<div className="contentsWrap">
 					<p className="title condensed">
-						Sharing Accounting Book
+						CONVERGENCE OF 2D AND 3D WEBGL
 					</p>
 					<div className="mainWrap">
 						<div className="leftWrap">

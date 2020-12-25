@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import countapVideo from "../../../assets/video/countap.mp4"
+import onlinePortfolioVideo from "../../../assets/video/online_portfolio.mp4"
 import { Controller, Scene } from 'react-scrollmagic'
 import { Tween, Timeline } from 'react-gsap'
 
@@ -71,7 +71,7 @@ const Index = () => {
                                                     from={{ opacity: '1', x: '0' }}
                                                     to={{ opacity: '0', x: '200px' }}
                                                 >
-                                                    <p>countap</p>
+                                                    <p>online portfolio</p>
                                                 </Tween>
                                             </Timeline>
                                             <Timeline totalProgress={progressTime(progress, 0.22, 0.3)} paused>
@@ -85,7 +85,7 @@ const Index = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div id="section2Title" className="titlePageWrap pageWrap">
+                                <div id="section1Title" className="titlePageWrap pageWrap">
                                     <div className="titleWrap">
                                         <div className="background">
                                             <Timeline totalProgress={progressTime(progress, 0.24, 0.3)} paused>
@@ -95,7 +95,7 @@ const Index = () => {
                                                 >
                                                     <div className="videoWrap">
                                                         <video ref={videoElement} className="video" autoPlay muted={true}>
-                                                            <source src={countapVideo} type="video/mp4" />
+                                                            <source src={onlinePortfolioVideo} type="video/mp4" />
                                                         </video>
                                                     </div>
                                                 </Tween>
@@ -117,7 +117,7 @@ const Index = () => {
                                                 >
                                                     <div className="titleBox">
                                                         <p className="title condensed">
-                                                        countap
+                                                            onl ine portfolio
                                                         </p>
                                                     </div>
                                                 </Tween>
@@ -129,16 +129,11 @@ const Index = () => {
                                                 >
                                                     <div className="lineVertical line"></div>
                                                     <div className="contentsWrap">
-                                                        <p><b>countap</b></p>
-                                                        <p><b>TEAM PROJECT</b></p>
+                                                        <p><b>ONLINE PORTFOLIO</b></p>
+                                                        <p><b>PERSONAL PROJECT</b></p>
                                                         <p>&nbsp;</p>
                                                         <p><b>PLATFORM</b></p>
                                                         <p>WEBSITE</p>
-                                                        <p>&nbsp;</p>
-                                                        <p><b>ROLE</b></p>
-                                                        <p>PLAN</p>
-                                                        <p>DESIGN</p>
-                                                        <p>DEVELOPE</p>
                                                         <p>&nbsp;</p>
                                                         <p><b>SIZE</b></p>
                                                         <p>RESPONSIVE</p>
@@ -155,12 +150,6 @@ const Index = () => {
                                                         <p>THREE.JS</p>
                                                         <p>P5.JS</p>
                                                         <p>REACT</p>
-                                                        <p>REDUX</p>
-                                                        <p>AWS ARCHITECTURE</p>
-                                                        <p>&nbsp;</p>
-                                                        <p><b>HONOR</b></p>
-                                                        <p>Winning the president prize</p>
-                                                        <p>at Anyang University's Capstone Contest</p>
                                                     </div>
                                                 </Tween>
                                             </Timeline>

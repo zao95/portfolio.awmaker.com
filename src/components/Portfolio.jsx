@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Sections from "./Sections"
 import Main from "./Main"
 import Footer from "./Footer"
@@ -15,16 +15,25 @@ import Loading from "./common/Loading"
 // 2.	resize 시, slide 다시 렌더링시키기
 
 const Portfolio = () => {
+	const [isMobile, setIsMobile] = useState(false)
+	useEffect(() => {
+		let filter = "win16|win32|win64|mac"
+		if (navigator.platform) {
+			setIsMobile(filter.indexOf(navigator.platform.toLowerCase()) < 0)
+		}
+		setIsMobile(true)
+		isMobile && (window.location.href = "https://m.portfolio.awmaker.com/")
+	}, [isMobile])
 	return (
 		<>
-			<Loading />
-			<Nav />
-			<Main />
-			<Sections />
-			<Footer />
-			<div id="onTheTop" onClick={() => {window.scrollTo(0, 0)}}>
-				<div className="button" />
-			</div>
+		<Loading />
+		<Nav />
+		<Main />
+		<Sections />
+		<Footer />
+		<div id="onTheTop" onClick={() => {window.scrollTo(0, 0)}}>
+			<div className="button" />
+		</div>
 		</>
 	)
 }

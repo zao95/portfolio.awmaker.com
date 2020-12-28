@@ -21,7 +21,6 @@ const Portfolio = () => {
 		if (navigator.platform) {
 			setIsMobile(filter.indexOf(navigator.platform.toLowerCase()) < 0)
 		}
-		setIsMobile(true)
 		isMobile && (window.location.href = "https://m.portfolio.awmaker.com/")
 	}, [isMobile])
 	return (

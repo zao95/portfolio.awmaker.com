@@ -116,7 +116,7 @@ const Index = () => {
                                                         <p>designer</p>
                                                         <p>&nbsp;</p>
                                                         <p>+82 10-9522-0890</p>
-                                                        <p>awmaker@kakao.com</p>
+                                                        <p id="emailAddress">awmaker@kakao.com</p>
                                                     </div>
                                                 </Tween>
                                             </Timeline>

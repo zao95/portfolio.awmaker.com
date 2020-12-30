@@ -31,7 +31,7 @@ const Contents = () => {
 		<>
             <div id="section1Contents" className="contentsPageWrap pageWrap">
 				<div className="contentsWrap">
-					<p className="title condensed">
+					<p className="title condensed withLink" onClick={() => window.open("https://app.countap.com/", "_blank")}>
 						Sharing Accounting Book
 					</p>
 					<div className="mainWrap">

@@ -27,6 +27,17 @@ $errorPoint: #db4b46
             font-size: 2.5em
             font-weight: 700
             text-transform: uppercase
+        .withLink
+            cursor: pointer
+            &::after
+                content: ""
+                position: absolute
+                width: 56px
+                height: 48px
+                background-position: center center
+                background-size: contain
+                background-repeat: no-repeat
+                background-image: url("../../../assets/icons/link.svg")
         .mainWrap
             display: flex
             flex-direction: row

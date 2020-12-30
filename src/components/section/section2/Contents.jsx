@@ -21,7 +21,7 @@ const Contents = () => {
 		<>
             <div id="section2Contents" className="contentsPageWrap pageWrap">
 				<div className="contentsWrap">
-					<p className="title condensed">
+					<p className="title condensed withLink" onClick={() => window.open("https://www.awmaker.com/", "_blank")}>
 						CONVERGENCE OF 2D AND 3D WEBGL
 					</p>
 					<div className="mainWrap">

@@ -171,8 +171,11 @@ const Contents = () => {
 								CERTIFICATES
 							</p>
 							<div className="introduce">
-								<p>Engineer Information Processing</p>
 								<p>Craftsman Computer Graphics Operation</p>
+								<p>ICDL M9 Image Editing</p>
+								<p>GTQ Level-1</p>
+								<p>GTQ Level-2</p>
+								<p>GTQi Level-1</p>
 							</div>
 						</div>
 					</div>

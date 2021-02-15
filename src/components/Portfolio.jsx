@@ -16,7 +16,7 @@ import Loading from "./common/Loading"
 
 const Portfolio = () => {
 	useEffect(() => {
-        let filter = "win16|win32|win64|mac|Mac"
+        let filter = "win16|win32|win64|mac|Mac|macintel"
         let isMobile
 		if (navigator.platform) {
 			isMobile = filter.indexOf(navigator.platform.toLowerCase()) < 0

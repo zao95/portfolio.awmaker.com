@@ -113,7 +113,7 @@ const Main = () => {
 					<div id="musicState" />
 				</div>
 				<div id="mainPageTitle">
-					<p className="condensed">Front-end Developer</p>
+					<p className="condensed">Full-Stack Developer</p>
 					<p className="condensed">Lee Jeong-Woo</p>
 				</div>
 			</div>

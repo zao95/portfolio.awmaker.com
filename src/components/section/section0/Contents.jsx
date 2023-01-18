@@ -24,7 +24,7 @@ const Contents = () => {
 						<div className="leftWrap">
 							<div className="contents">
 								I am a student majoring in design who is dreaming 
-								of becoming a front-end developer. Even though I 
+								of becoming a full stack developer. Even though I 
 								started later than other students, I wrote a paper 
 								on deep learning in two years and won many awards 
 								in the contest for my excellent development skills.

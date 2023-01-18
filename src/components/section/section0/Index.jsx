@@ -112,7 +112,7 @@ const Index = () => {
                                                     <div className="lineVertical line"></div>
                                                     <div className="contentsWrap">
                                                         <p><b>position</b></p>
-                                                        <p>front-end developer</p>
+                                                        <p>full stack developer</p>
                                                         <p>designer</p>
                                                         <p>&nbsp;</p>
                                                         <p>+82 10-9522-0890</p>
